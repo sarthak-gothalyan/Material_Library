@@ -59,6 +59,11 @@ export struct MaterialSelect {
         .objectFit(ImageFit.Cover)
         .opacity(0.5)
         .margin(5)
+      //      Polygon({ wi
+//      Polygon({ width: 24, height: 12 })
+//        .points([[0, 0], [12, 12], [24, 0]])
+//        .opacity(0.5)
+//        .margin(5)
     }
       .width(this.width)
       .height(this.height)
@@ -145,6 +150,10 @@ export struct MultipleMaterialSelect {
         .objectFit(ImageFit.Cover)
         .opacity(0.5)
         .margin(5)
+//      Polygon({ width: 24, height: 12 })
+//        .points([[0, 0], [12, 12], [24, 0]])
+//        .opacity(0.5)
+//        .margin(5)
     }
     .width(this.width)
     .height(this.height)
@@ -185,13 +194,13 @@ export struct MaterialDescription {
           .textOverflow({overflow: TextOverflow.Ellipsis})
           .maxLines(1)
           .margin({left: 10, top: 5})
-        Image($r('app.media.icon'))
+        Image($r('app.media.menu'))
           .height(24)
           .width(24)
           .objectFit(ImageFit.Cover)
           .opacity(0.5)
           .margin(5)
-      }
+        }
       Text(this.text)
         .height(this.height - (24 + 10 + 5 + 10 + 5))
         .width(this.width - (10 + 5))
