@@ -126,8 +126,10 @@ export struct MultipleMaterialSelect {
     }
       .height(48)
       .margin({top: 8, bottom: 8, left: 12, right: 12})
-      .onClick((e) => {
+      .onClick(() => {
+        console.log("" + option.is_checked)
         option.is_checked = !option.is_checked
+        console.log("" + option.is_checked)
       })
   }
 
