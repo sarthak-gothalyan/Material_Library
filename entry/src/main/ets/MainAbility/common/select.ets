@@ -3,9 +3,11 @@ export class MenuOption {
   icon?: Resource | string
 }
 
+// make callback for select
+
 @Component
 export struct MaterialSelect {
-  @Link menu: MenuOption[]
+  menu: MenuOption[]
   @State width: number = 120
   @State height: number = 60
   @State placeholder: string = 'Select'
@@ -30,6 +32,9 @@ export struct MaterialSelect {
     }
       .height(48)
       .margin({top: 8, bottom: 8, left: 12, right: 12})
+      .onClick(() => {
+        this.placeholder = msg
+      })
   }
 
   @Builder MenuBuilder() {
@@ -107,32 +112,35 @@ export struct MultipleMaterialSelect {
   @State private background_color: ResourceColor | string = Color.White;
   @State private border_color: ResourceColor | string = '#d4d4d4';
 
-  @Builder MenuItem(msg: string, is_checked: boolean) {
+  @Builder MenuItem(option: MultipleMenuOption) {
     Row({space: 12}) {
-      Checkbox({name: msg,  group: 'checkboxGroup'})
-        .select(is_checked)
+      Checkbox({name: option.value,  group: 'checkboxGroup'})
+        .select(option.is_checked)
         .selectedColor(Color.Blue)
         .height(10)
         .width(10)
         .padding(0)
         .margin(4)
-      Text(msg)
+      Text(option.value)
         .fontSize(18)
     }
-    .height(48)
-    .margin({top: 8, bottom: 8, left: 12, right: 12})
+      .height(48)
+      .margin({top: 8, bottom: 8, left: 12, right: 12})
+      .onClick((e) => {
+        option.is_checked = !option.is_checked
+      })
   }
 
   @Builder MenuBuilder() {
     //Flex({direction: FlexDirection.Column, alignContent: FlexAlign.Start}) {
     Column() {
       ForEach(this.menu, (item) => {
-        this.MenuItem(item.value, item.is_checked)
+        this.MenuItem(item)
       })
     }
-    .alignItems(HorizontalAlign.Start)
-    .width(250)
-    .borderRadius(4)
+      .alignItems(HorizontalAlign.Start)
+      .width(250)
+      .borderRadius(4)
   }
 
   build() {
@@ -155,24 +163,24 @@ export struct MultipleMaterialSelect {
 //        .opacity(0.5)
 //        .margin(5)
     }
-    .width(this.width)
-    .height(this.height)
-    .justifyContent(FlexAlign.SpaceBetween)
-    .borderWidth(2)
-    .borderColor('#d4d4d4')
-    .borderRadius(4)
-    .backgroundColor(this.background_color)
-    .bindMenu(this.MenuBuilder)
-    .onHover((isHover) => {
-      if(isHover) {
-        this.background_color = this.hover_background_color
-        this.border_color = this.hover_border_color
-      }
-      else {
-        this.background_color = this.idle_background_color
-        this.border_color = this.idle_border_color
-      }
-    })
+      .width(this.width)
+      .height(this.height)
+      .justifyContent(FlexAlign.SpaceBetween)
+      .borderWidth(2)
+      .borderColor('#d4d4d4')
+      .borderRadius(4)
+      .backgroundColor(this.background_color)
+      .bindMenu(this.MenuBuilder)
+      .onHover((isHover) => {
+        if(isHover) {
+          this.background_color = this.hover_background_color
+          this.border_color = this.hover_border_color
+        }
+        else {
+          this.background_color = this.idle_background_color
+          this.border_color = this.idle_border_color
+        }
+      })
   }
 }
 

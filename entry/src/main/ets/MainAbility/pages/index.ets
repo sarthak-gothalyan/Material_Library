@@ -37,7 +37,7 @@ struct Index {
   build() {
     Row() {
       Column() {
-        MaterialSelect({menu: $select_menu, placeholder: 'Select', height: 80, width: 130, background_color: Color.Pink})
+        MaterialSelect({menu: this.select_menu, placeholder: 'Select', height: 80, width: 130, background_color: Color.Pink})
         MultipleMaterialSelect({menu: $multiple_select_menu, placeholder: 'Select', height: 80, width: 130, background_color: Color.Pink})
         MaterialDescription({text: this.desc, placeholder: 'File', height: 80, width: 130})
       }
