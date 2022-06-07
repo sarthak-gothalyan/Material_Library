@@ -40,6 +40,11 @@ struct Index {
         MaterialSelect({menu: this.select_menu, placeholder: 'Select', height: 80, width: 130, background_color: Color.Pink})
         MultipleMaterialSelect({menu: $multiple_select_menu, placeholder: 'Select', height: 80, width: 130, background_color: Color.Pink})
         MaterialDescription({text: this.desc, placeholder: 'File', height: 80, width: 130})
+        Button("Test").onClick(() => {
+          for(let i = 0; i < this.multiple_select_menu.length; i++) {
+            console.log("" + this.multiple_select_menu[i].is_checked)
+          }
+        })
       }
       .width('100%')
     }

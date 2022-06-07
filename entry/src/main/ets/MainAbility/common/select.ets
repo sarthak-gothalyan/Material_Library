@@ -1,16 +1,16 @@
+// ############################ single material select component
 export class MenuOption {
   value: string
   icon?: Resource | string
 }
 
-// make callback for select
-
 @Component
 export struct MaterialSelect {
   menu: MenuOption[]
-  @State width: number = 120
-  @State height: number = 60
+  width: number = 120
+  height: number = 60
   @State placeholder: string = 'Select'
+  // might decide to make it change dynamically
   @State font_size: number = 20;
 
   // make these non-accessible
@@ -18,9 +18,11 @@ export struct MaterialSelect {
   private idle_border_color: ResourceColor | string = '#d4d4d4';
   private hover_background_color: ResourceColor | string = '#f2a0e7';
   private hover_border_color: ResourceColor | string = '#eb59d7';
+  // current active colors
   @State private background_color: ResourceColor | string = Color.White;
   @State private border_color: ResourceColor | string = '#d4d4d4';
 
+  // single menu item
   @Builder MenuItem(msg: string, icon?: Resource | string) {
     Row({space: 12}) {
       Image(icon)
@@ -37,8 +39,8 @@ export struct MaterialSelect {
       })
   }
 
+  // the complete menu
   @Builder MenuBuilder() {
-    //Flex({direction: FlexDirection.Column, alignContent: FlexAlign.Start}) {
      Column() {
       ForEach(this.menu, (item) => {
         this.MenuItem(item.value, item.icon)
@@ -64,7 +66,7 @@ export struct MaterialSelect {
         .objectFit(ImageFit.Cover)
         .opacity(0.5)
         .margin(5)
-      //      Polygon({ wi
+//      down arrow
 //      Polygon({ width: 24, height: 12 })
 //        .points([[0, 0], [12, 12], [24, 0]])
 //        .opacity(0.5)
@@ -91,6 +93,7 @@ export struct MaterialSelect {
   }
 }
 
+// ############################ multiple material select component
 export class MultipleMenuOption {
   value: string
   is_checked: boolean
@@ -98,9 +101,12 @@ export class MultipleMenuOption {
 
 @Component
 export struct MultipleMaterialSelect {
+  // stop the menu from disappearing on click
+
   @Link menu: MultipleMenuOption[]
-  @State width: number = 120
-  @State height: number = 60
+  width: number = 120
+  height: number = 60
+  // might decide to make it change dynamically
   @State placeholder: string = 'Select'
   @State font_size: number = 20;
 
@@ -109,12 +115,14 @@ export struct MultipleMaterialSelect {
   private idle_border_color: ResourceColor | string = '#d4d4d4';
   private hover_background_color: ResourceColor | string = '#f2a0e7';
   private hover_border_color: ResourceColor | string = '#eb59d7';
+  // current active colors
   @State private background_color: ResourceColor | string = Color.White;
   @State private border_color: ResourceColor | string = '#d4d4d4';
 
-  @Builder MenuItem(option: MultipleMenuOption) {
+  // single menu item
+  @Builder MenuItem(option: MultipleMenuOption, index) {
     Row({space: 12}) {
-      Checkbox({name: option.value,  group: 'checkboxGroup'})
+      Checkbox({name: option.value,  group: "check"})
         .select(option.is_checked)
         .selectedColor(Color.Blue)
         .height(10)
@@ -124,20 +132,25 @@ export struct MultipleMaterialSelect {
       Text(option.value)
         .fontSize(18)
     }
-      .height(48)
-      .margin({top: 8, bottom: 8, left: 12, right: 12})
-      .onClick(() => {
-        console.log("" + option.is_checked)
-        option.is_checked = !option.is_checked
-        console.log("" + option.is_checked)
-      })
+    .height(48)
+    .margin({top: 8, bottom: 8, left: 12, right: 12})
+    .onClick(() => {
+      this.menu[index].is_checked = !this.menu[index].is_checked
+      let list = []
+      for (let i = 0; i < this.menu.length; i++) {
+        let m = this.menu[i]
+        list.push(m)
+      }
+      this.menu = list
+    })
   }
 
+  // complete menu
   @Builder MenuBuilder() {
     //Flex({direction: FlexDirection.Column, alignContent: FlexAlign.Start}) {
     Column() {
-      ForEach(this.menu, (item) => {
-        this.MenuItem(item)
+      ForEach(this.menu, (item, i) => {
+        this.MenuItem(item, i)
       })
     }
       .alignItems(HorizontalAlign.Start)
@@ -160,6 +173,7 @@ export struct MultipleMaterialSelect {
         .objectFit(ImageFit.Cover)
         .opacity(0.5)
         .margin(5)
+//      down arrow
 //      Polygon({ width: 24, height: 12 })
 //        .points([[0, 0], [12, 12], [24, 0]])
 //        .opacity(0.5)
@@ -186,10 +200,11 @@ export struct MultipleMaterialSelect {
   }
 }
 
+// ############################ file material select component
 @Component
 export struct MaterialDescription {
-  @State width: number = 120
-  @State height: number = 120
+  width: number = 120
+  height: number = 120
   @State font_size: number = 20;
   @State placeholder: string = 'File'
   @State text: string = "lore ipsum"
