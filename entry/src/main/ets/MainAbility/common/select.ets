@@ -1,4 +1,5 @@
-// make dimensions dynamic
+// import model class
+import { MaterialModel } from './materialModel'
 
 // ############################ single material select component
 export class MenuOption {
@@ -7,43 +8,37 @@ export class MenuOption {
 }
 
 @Component
-export struct MaterialSelect {
+export struct Select {
+	// should menu item have height width or only font size
+
     // initialize selection
+	name: string = 'Select'
     menu: MenuOption[]
-    select: (item: MenuOption) => void
+    onSelect: (item: MenuOption) => void
+	@State placeholder: string = 'Select'
+	@State model: MaterialModel.Model = new MaterialModel.Model()
+	@State menuModel: MaterialModel.MenuModel = new MaterialModel.MenuModel()
     width: number = 185
     height: number = 60
-    default?: number
-    @State placeholder: string = 'Select'
-    name: string = 'Select'
-    // might decide to make it change dynamically
-    @State font_size: number = 18;
-
-    // make these non-accessible
-    private idle_background_color: ResourceColor | string = Color.White;
-    private idle_border_color: ResourceColor | string = '#d4d4d4';
-    private hover_background_color: ResourceColor | string = '#f2a0e7';
-    private hover_border_color: ResourceColor | string = '#eb59d7';
-    // current active colors
-    @State private background_color: ResourceColor | string = Color.White;
-    @State private border_color: ResourceColor | string = '#d4d4d4';
+    fontSize: number = 18
+    backgroundColor: ResourceColor | string = Color.White;
+    borderColor: ResourceColor | string = '#d4d4d4';
 
     // single menu item
     @Builder MenuItem(option: MenuOption) {
         Row() {
             Text(option.value)
-            .fontSize(16)
-            .fontWeight(FontWeight.Bold)
-            .height(21)
-            .width(185 - (12 + 12))
-            .textOverflow({overflow: TextOverflow.Ellipsis})
-            .margin({left: 12, top: 15, bottom: 15})
+				.fontSize(this.menuModel.fontSize)
+				.fontWeight(FontWeight.Bold)
+				.maxLines(2)
+				.textOverflow({overflow: TextOverflow.Ellipsis})
+				.margin({left: 12, top: 15, bottom: 15})
         }
-            .height(15 + 21 + 15)
-            .width(185)
+            .height(this.menuModel.height)
+			.width(this.menuModel.width)
             .onClick(() => {
-            this.placeholder = option.value
-            this.select(option)
+                this.placeholder = option.value
+                this.onSelect(option)
             })
     }
 
@@ -54,42 +49,39 @@ export struct MaterialSelect {
                 this.MenuItem(item)
             })
         }
-            //.height(205)
-            .width(185)
+            .width(this.menuModel.width)
             .padding({top: 7, bottom: 7})
-            .borderRadius(4)
+            .borderRadius(this.menuModel.borderRadius)
     }
 
     build() {
         Column({space: 10}) {
             Text(this.name)
                 .fontSize(14)
-                .fontColor('#333F48')
+                .fontColor(this.model.fontColor)
                 .fontWeight(FontWeight.Medium)
             Row() {
                 Text(this.placeholder)
-                    .fontSize(this.font_size)
+                    .fontSize(this.model.fontSize)
                     .fontWeight(FontWeight.Bold)
-                    .fontColor('#333F48')
-                    .width(this.width - (16 + 26 + 10))
-                    .height(this.height - (18 + 18))
+                    .fontColor(this.model.fontColor)
+					.maxLines(1)
                     .textOverflow({ overflow: TextOverflow.Ellipsis })
-                    .maxLines(1)
                     .margin({ left: 16, top: 18, bottom: 18 })
                 Image($r('app.media.dropdown'))
                     .height(8)
                     .width(16)
-                    .objectFit(ImageFit.Cover)
+                    .objectFit(ImageFit.Contain)
                     .opacity(0.5)
                     .margin({ right: 10, top: 26, bottom: 26 })
             }
-                .width(this.width)
-                .height(this.height)
+                .width(this.model.width)
+                .height(this.model.height)
                 .justifyContent(FlexAlign.SpaceBetween)
-                .borderWidth(1)
-                .borderColor('#9CA2C7')
-                .borderRadius(4)
-                .backgroundColor(this.background_color)
+                .borderWidth(this.model.borderWidth)
+                .borderColor(this.model.borderColor)
+                .borderRadius(this.model.borderRadius)
+                .backgroundColor(this.model.backgroundColor)
                 .bindMenu(this.MenuBuilder())
         }
             .alignItems(HorizontalAlign.Start)
@@ -109,27 +101,15 @@ export class MultipleMenuSelection {
 }
 
 @Component
-export struct MultipleMaterialSelect {
+export struct MultipleSelect {
     // stop the menu from disappearing on click
-    // initialize selection
 
+	name: string = 'Multiple Select'
     @State menu: MultipleMenuOption[] = []
     private selected: MultipleMenuSelection[] = []
     select: (itemList: MultipleMenuSelection[]) => void
-    width: number = 185
-    height: number = 60
-    name: string = 'Multi Select'
-    // might decide to make it change dynamically
-    @State font_size: number = 18;
-
-    // make these non-accessible
-    private idle_background_color: ResourceColor | string = Color.White;
-    private idle_border_color: ResourceColor | string = '#d4d4d4';
-    private hover_background_color: ResourceColor | string = '#f2a0e7';
-    private hover_border_color: ResourceColor | string = '#eb59d7';
-    // current active colors
-    @State private background_color: ResourceColor | string = Color.White;
-    @State private border_color: ResourceColor | string = '#d4d4d4';
+	@State model: MaterialModel.Model = new MaterialModel.Model()
+	@State menuModel: MaterialModel.MultipleMenuModel = new MultipleMenuModel()
 
     aboutToAppear() {
         let choices = []
@@ -148,19 +128,17 @@ export struct MultipleMaterialSelect {
         Row({space: 9}) {
             Checkbox({name: option.value,  group: "check"})
                 .select(option.is_checked)
-                .selectedColor(Color.Blue)
-                .height(24)
-                .width(24)
+                .selectedColor(this.menuModel.selectedColor)
+                .height(this.menuModel.checkBoxHeight)
+                .width(this.menuModel.checkBoxWidth)
                 .margin({left: 12})
             Text(option.value)
-                .fontSize(16)
+                .fontSize(this.menuModel.fontSize)
                 .fontWeight(FontWeight.Bold)
-                .height(21)
-                .width(185 - (45 + 12))
+				.maxLines(2)
                 .textOverflow({overflow: TextOverflow.Ellipsis})
         }
-            .height(15 + 21 + 15)
-            .width(185)
+            .width(this.menuModel.width)
             .onClick(() => {
                 this.menu[index].is_checked = !this.menu[index].is_checked
                 let list = []
@@ -185,33 +163,33 @@ export struct MultipleMaterialSelect {
             this.MenuItem(item, i)
         })
     }
-        .width(185)
+        .width(this.menuModel.width)
         .padding({top: 7, bottom: 7})
-        .borderRadius(4)
+        .borderRadius(this.menuModel.borderRadius)
     }
 
     build() {
         Column({space: 10}) {
             Text(this.name)
                 .fontSize(14)
-                .fontColor('#333F48')
+                .fontColor(this.model.fontColor)
                 .fontWeight(FontWeight.Medium)
             Row() {
                 Image($r('app.media.dropdown'))
                     .height(8)
                     .width(16)
-                    .objectFit(ImageFit.Cover)
+                    .objectFit(ImageFit.Contain)
                     .opacity(0.5)
                     .margin({ right: 10, top: 26, bottom: 26 })
             }
-                .width(this.width)
-                .height(this.height)
+                .height(this.model.height)
+				.width(this.model.width)
                 .justifyContent(FlexAlign.End)
-                .borderWidth(1)
-                .borderColor('#9CA2C7')
-                .borderRadius(4)
-                .backgroundColor(this.background_color)
-                .bindMenu(this.MenuBuilder)
+                .borderWidth(this.model.borderWidth)
+                .borderColor(this.model.borderColor)
+                .borderRadius(this.model.borderRadius)
+                .backgroundColor(this.model.backgroundColor)
+                .bindMenu(this.MenuBuilder())
         }
             .alignItems(HorizontalAlign.Start)
     }
@@ -224,12 +202,12 @@ class FileOption {
 }
 
 @Component
-export struct MaterialFileSelect {
+export struct DotMenu {
     width: number = 380
     height: number = 96
-    @State font_size: number = 18;
-    @State placeholder: string = 'File'
-    @State text: string = "lore ipsum"
+    fontSize: number = 18;
+    placeholder: string = 'File'
+    text: string = "lore ipsum"
 
     // single menu item
     @Builder MenuItem(option: FileOption, index: number) {
@@ -270,7 +248,7 @@ export struct MaterialFileSelect {
         Column({space: 8}) {
             Row() {
                 Text(this.placeholder)
-                    .fontSize(this.font_size)
+                    .fontSize(this.fontSize)
                     .fontWeight(FontWeight.Bold)
                     .fontColor('#333F48')
                     .width(this.width - (16 + 279))
@@ -279,7 +257,7 @@ export struct MaterialFileSelect {
                 Image($r('app.media.dot_menu'))
                     .height(26)
                     .width(6)
-                    .objectFit(ImageFit.Cover)
+                    .objectFit(ImageFit.Contain)
                     .opacity(0.5)
                     .bindMenu(this.MenuBuilder)
             }

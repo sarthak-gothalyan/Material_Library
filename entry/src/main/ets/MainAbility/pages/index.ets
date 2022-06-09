@@ -12,12 +12,12 @@
 // aboutToAppear works before rendering
 
 import {
-    MaterialSelect,
+    Select,
     MenuOption,
-    MultipleMaterialSelect,
+    MultipleSelect,
     MultipleMenuOption,
     MultipleMenuSelection,
-    MaterialFileSelect
+    DotMenu
 } from '../common/select'
 
 @Entry
@@ -56,27 +56,27 @@ struct Index {
             }
               .width('80%')
             Row() {
-                MaterialSelect({
-                    menu: this.select_menu,
-                    select: (it: MenuOption) => {
-                        console.log(it.value)
-                    },
-                    background_color: Color.Pink
-                })
-                MultipleMaterialSelect({
-                    menu: this.multiple_select_menu,
-                    select: (itL: MultipleMenuSelection[]) => {
-                        itL.forEach((it) => {
-                            console.log(it.value)
-                        })
-                    },
-                    background_color: Color.Pink
-                })
+//                Select({
+//                    menu: this.select_menu,
+//                    select: (it: MenuOption) => {
+//                        console.log(it.value)
+//                    },
+//                    background_color: Color.Pink
+//                })
+//                MultipleSelect({
+//                    menu: this.multiple_select_menu,
+//                    select: (itL: MultipleMenuSelection[]) => {
+//                        itL.forEach((it) => {
+//                            console.log(it.value)
+//                        })
+//                    },
+//                    background_color: Color.Pink
+//                })
             }
-            MaterialFileSelect({text: this.desc})
+            DotMenu({text: this.desc})
             Button("Test").onClick(() => {
                 console.log("Select: " + this.selection.value + ", " + this.selection.id)
-                this.multiple_selection.forEach((it, i) => {
+                this.multiple_selection.forEach((it) => {
                     console.log("Multiple Select: " + it.value + ", " + it.id)
                 })
             })
