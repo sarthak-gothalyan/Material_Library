@@ -12,7 +12,6 @@ export namespace MaterialModel {
 		private borderWidth: number | string = 1
 		private borderRadius: number | string = 4
 		private borderColor: string | Color = '#9CA2C7'
-		// add functionality for selection color
 		private unselectedColor: string | Color = Color.White
 		private selectedColor: string | Color = '#F0F3FF'
 
