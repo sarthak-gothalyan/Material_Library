@@ -30,7 +30,7 @@ export struct MaterialSelect {
 			this.menuModel = new MaterialModel.MenuModel()
 		}
 		if(this.onSelect == null || this.onSelect == undefined) {
-			this.onSelect = (it: MenuOption) => {}
+			this.onSelect = () => {}
 		}
 		if(this.menu == null || this.menu == undefined) {
 			this.menu = []
@@ -131,7 +131,7 @@ export struct MultipleSelect {
 			this.menuModel = new MaterialModel.MultipleMenuModel()
 		}
 		if(this.onSelect == null || this.onSelect == undefined) {
-			this.onSelect = (it: MultipleMenuOption[]) => {}
+			this.onSelect = () => {}
 		}
 		if(this.menu == null || this.menu == undefined) {
 			this.menu = []
@@ -248,7 +248,7 @@ export struct MaterialDotMenu {
 			this.menuModel = new MaterialModel.DotMenuModel()
 		}
 		if(this.onSelect == null || this.onSelect == undefined) {
-			this.onSelect = (it: DotMenuOption) => {}
+			this.onSelect = () => {}
 		}
 		if(this.menu == null || this.menu == undefined) {
 			this.menu = []
@@ -289,15 +289,13 @@ export struct MaterialDotMenu {
     }
 
     build() {
-		Row() {
-			Image($r('app.media.dot_menu'))
-				.height(this.model.getHeight())
-				.width(this.model.getWidth())
-				.borderColor(this.model.getBorderColor())
-				.borderRadius(this.model.getBorderRadius())
-				.borderWidth(this.model.getBorderWidth())
-				.objectFit(ImageFit.Contain)
-				.bindMenu(this.MenuBuilder())
-		}
+		Image($r('app.media.dot_menu'))
+			.height(this.model.getHeight())
+			.width(this.model.getWidth())
+			.borderColor(this.model.getBorderColor())
+			.borderRadius(this.model.getBorderRadius())
+			.borderWidth(this.model.getBorderWidth())
+			.objectFit(ImageFit.Contain)
+			.bindMenu(this.MenuBuilder())
 	}
 }
