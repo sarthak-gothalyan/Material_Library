@@ -10,32 +10,25 @@ export class MenuOption {
 @Component
 export struct MaterialSelect {
     // initialize selection
-	name: string = 'Select'
     menu: MenuOption[]
     onSelect: (item: MenuOption) => void
-	@State placeholder: string = 'Select'
 	@State model: MaterialModel.Model = new MaterialModel.Model()
 	@State menuModel: MaterialModel.MenuModel = new MaterialModel.MenuModel()
-    width: number = 185
-    height: number = 60
-    fontSize: number = 18
-    backgroundColor: ResourceColor | string = Color.White
-    borderColor: ResourceColor | string = '#d4d4d4'
 
     // single menu item
     @Builder MenuItem(option: MenuOption, ind: number) {
         Row() {
             Text(option.value)
-				.fontSize(this.menuModel.fontSize)
+				.fontSize(this.menuModel.getFontSize())
 				.fontWeight(FontWeight.Bold)
 				.maxLines(2)
 				.textOverflow({overflow: TextOverflow.Ellipsis})
 				.margin({left: 12, top: 15, bottom: 15})
         }
-            .height(this.menuModel.height)
-			.width(this.menuModel.width)
+            .height(this.menuModel.getHeight())
+			.width(this.menuModel.getWidth())
             .onClick(() => {
-                this.placeholder = option.value
+                this.model.setPlaceholder(option.value)
                 this.onSelect(option)
             })
     }
@@ -47,22 +40,22 @@ export struct MaterialSelect {
                 this.MenuItem(item, i)
             })
         }
-            .width(this.menuModel.width)
+            .width(this.menuModel.getWidth())
             .padding({top: 7, bottom: 7})
-            .borderRadius(this.menuModel.borderRadius)
+            .borderRadius(this.menuModel.getBorderRadius())
     }
 
     build() {
         Column({space: 10}) {
-            Text(this.name)
-                .fontSize(14)
-                .fontColor(this.model.fontColor)
+            Text(this.model.getTitle())
+                .fontSize(this.model.getTitleFontSize())
+                .fontColor(this.model.getFontColor())
                 .fontWeight(FontWeight.Medium)
             Row() {
-                Text(this.placeholder)
-                    .fontSize(this.model.fontSize)
+                Text(this.model.getPlaceholder())
+                    .fontSize(this.model.getFontSize())
                     .fontWeight(FontWeight.Bold)
-                    .fontColor(this.model.fontColor)
+                    .fontColor(this.model.getFontColor())
 					.maxLines(1)
                     .textOverflow({ overflow: TextOverflow.Ellipsis })
                     .margin({ left: 16, top: 18, bottom: 18 })
@@ -73,13 +66,13 @@ export struct MaterialSelect {
                     .opacity(0.5)
                     .margin({ right: 10, top: 26, bottom: 26 })
             }
-                .width(this.model.width)
-                .height(this.model.height)
+                .width(this.model.getWidth())
+                .height(this.model.getHeight())
                 .justifyContent(FlexAlign.SpaceBetween)
-                .borderWidth(this.model.borderWidth)
-                .borderColor(this.model.borderColor)
-                .borderRadius(this.model.borderRadius)
-                .backgroundColor(this.model.backgroundColor)
+                .borderWidth(this.model.getBorderWidth())
+                .borderColor(this.model.getBorderColor())
+                .borderRadius(this.model.getBorderRadius())
+                .backgroundColor(this.model.getBackgroundColor())
                 .bindMenu(this.MenuBuilder())
         }
             .alignItems(HorizontalAlign.Start)
@@ -90,22 +83,16 @@ export struct MaterialSelect {
 export class MultipleMenuOption {
     value: string
     id: any
-    is_checked: boolean
-}
-
-export class MultipleMenuSelection {
-    value: string
-    id: any
+    isChecked?: boolean
 }
 
 @Component
 export struct MultipleSelect {
     // stop the menu from disappearing on click
 
-	name: string = 'Multiple Select'
     @State menu: MultipleMenuOption[] = []
-    private selected: MultipleMenuSelection[] = []
-	onSelect: (itemList: MultipleMenuSelection[]) => void
+    private selected: MultipleMenuOption[] = []
+	onSelect: (itemList: MultipleMenuOption[]) => void
 	@State model: MaterialModel.Model = new MaterialModel.Model()
 	@State menuModel: MaterialModel.MultipleMenuModel = new MaterialModel.MultipleMenuModel()
 
@@ -113,7 +100,10 @@ export struct MultipleSelect {
         let choices = []
         for (let i = 0; i < this.menu.length; i++) {
             let m = this.menu[i]
-            if(m.is_checked) {
+			if(m.isChecked == null) {
+				m.isChecked = false
+			}
+            if(m.isChecked) {
                 choices.push({value: m.value, id: m.id})
             }
         }
@@ -125,26 +115,26 @@ export struct MultipleSelect {
     @Builder MenuItem(option: MultipleMenuOption, index: number) {
         Row({space: 9}) {
             Checkbox({name: option.value,  group: "check"})
-                .select(option.is_checked)
-                .selectedColor(this.menuModel.selectedColor)
-                .height(this.menuModel.checkBoxHeight)
-                .width(this.menuModel.checkBoxWidth)
+                .select(option.isChecked)
+                .selectedColor(this.menuModel.getSelectedColor())
+                .height(this.menuModel.getCheckBoxHeight())
+                .width(this.menuModel.getCheckBoxWidth())
                 .margin({left: 12})
             Text(option.value)
-                .fontSize(this.menuModel.fontSize)
+                .fontSize(this.menuModel.getFontSize())
                 .fontWeight(FontWeight.Bold)
 				.maxLines(2)
                 .textOverflow({overflow: TextOverflow.Ellipsis})
         }
-            .width(this.menuModel.width)
+            .width(this.menuModel.getWidth())
             .onClick(() => {
-                this.menu[index].is_checked = !this.menu[index].is_checked
+                this.menu[index].isChecked = !this.menu[index].isChecked
                 let list = []
                 let choices = []
                 for (let i = 0; i < this.menu.length; i++) {
                     let m = this.menu[i]
                     list.push(m)
-                    if(m.is_checked) {
+                    if(m.isChecked) {
                         choices.push({value: m.value, id: m.id})
                     }
                 }
@@ -161,16 +151,16 @@ export struct MultipleSelect {
             this.MenuItem(item, i)
         })
     }
-        .width(this.menuModel.width)
+        .width(this.menuModel.getWidth())
         .padding({top: 7, bottom: 7})
-        .borderRadius(this.menuModel.borderRadius)
+        .borderRadius(this.menuModel.getBorderRadius())
     }
 
     build() {
         Column({space: 10}) {
-            Text(this.name)
-                .fontSize(14)
-                .fontColor(this.model.fontColor)
+            Text(this.model.getTitle())
+                .fontSize(this.model.getTitleFontSize())
+                .fontColor(this.model.getFontColor())
                 .fontWeight(FontWeight.Medium)
             Row() {
                 Image($r('app.media.dropdown'))
@@ -180,13 +170,13 @@ export struct MultipleSelect {
                     .opacity(0.5)
                     .margin({ right: 10, top: 26, bottom: 26 })
             }
-                .height(this.model.height)
-				.width(this.model.width)
+                .height(this.model.getHeight())
+				.width(this.model.getWidth())
                 .justifyContent(FlexAlign.End)
-                .borderWidth(this.model.borderWidth)
-                .borderColor(this.model.borderColor)
-                .borderRadius(this.model.borderRadius)
-                .backgroundColor(this.model.backgroundColor)
+                .borderWidth(this.model.getBorderWidth())
+                .borderColor(this.model.getBorderColor())
+                .borderRadius(this.model.getBorderRadius())
+                .backgroundColor(this.model.getBackgroundColor())
                 .bindMenu(this.MenuBuilder())
         }
             .alignItems(HorizontalAlign.Start)
@@ -200,17 +190,10 @@ export class DotMenuOption {
 	id: number | string
 }
 
-export class DotMenuSelection {
-	value: string
-	id: number | string
-}
-
 @Component
 export struct MaterialDotMenu {
 	menu: DotMenuOption[] = []
-	height: number | string = 24
-	width: number | string = 24
-	onSelect: (it: DotMenuSelection) => any
+	onSelect: (it: DotMenuOption) => any
 	@State model: MaterialModel.DotModel = new MaterialModel.DotModel()
     @State menuModel: MaterialModel.DotMenuModel = new MaterialModel.DotMenuModel()
 
@@ -219,15 +202,15 @@ export struct MaterialDotMenu {
         Row({space: 12}) {
             Image(option.icon)
                 .objectFit(ImageFit.Contain)
-                .width(18)
-                .height(18)
+                .width(this.menuModel.getIconWidth())
+                .height(this.menuModel.getIconHeight())
             Text(option.value)
-                .fontSize(this.menuModel.fontSize)
-				.fontColor(this.menuModel.fontColor)
+                .fontSize(this.menuModel.getFontSize())
+				.fontColor(this.menuModel.getFontColor())
                 .fontWeight(FontWeight.Bold)
         }
-            .height(this.menuModel.height)
-            .width(this.menuModel.width)
+            .height(this.menuModel.getHeight())
+            .width(this.menuModel.getWidth())
             .onClick(() => {
 				this.onSelect({value: option.value, id: option.id})
             })
@@ -240,18 +223,18 @@ export struct MaterialDotMenu {
 				this.MenuItem(it)
 			})
         }
-            .width(this.menuModel.width)
+            .width(this.menuModel.getWidth())
             .padding({top: 7, bottom: 7})
-			.borderRadius(this.menuModel.borderRadius)
+			.borderRadius(this.menuModel.getBorderRadius())
     }
 
     build() {
 		Image($r('app.media.dot_menu'))
-			.height(this.model.height)
-			.width(this.model.width)
-			.borderColor(this.model.borderColor)
-			.borderRadius(this.model.borderRadius)
-			.borderWidth(this.model.borderWidth)
+			.height(this.model.getHeight())
+			.width(this.model.getWidth())
+			.borderColor(this.model.getBorderColor())
+			.borderRadius(this.model.getBorderRadius())
+			.borderWidth(this.model.getBorderWidth())
 			.objectFit(ImageFit.Contain)
 			.bindMenu(this.MenuBuilder())
 	}

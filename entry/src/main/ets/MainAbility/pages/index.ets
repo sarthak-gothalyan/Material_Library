@@ -6,10 +6,8 @@ import {
     MenuOption,
     MultipleSelect,
     MultipleMenuOption,
-    MultipleMenuSelection,
     MaterialDotMenu,
-	DotMenuOption,
-	DotMenuSelection
+	DotMenuOption
 } from '../common/select'
 
 import {
@@ -23,13 +21,13 @@ struct Index {
 	placeholder: string = 'select'
     selectMenu: MenuOption[] = []
     @State selection: MenuOption = {value: "", id: -1}
-	selectModel: MaterialModel.Model = new MaterialModel.Model()
+	selectModel: MaterialModel.Model = new MaterialModel.Model('Industry')
 	selectMenuModel: MaterialModel.MenuModel = new MaterialModel.MenuModel()
 
 	multipleSelectName: string = 'Use Case'
     multipleSelectMenu: MultipleMenuOption[] = []
-    @State multiple_selection: MultipleMenuSelection[] = []
-	multipleSelectModel: MaterialModel.Model = new MaterialModel.Model()
+    @State multiple_selection: MultipleMenuOption[] = []
+	multipleSelectModel: MaterialModel.Model = new MaterialModel.Model('Use Case')
 	multipleMenuModel: MaterialModel.MultipleMenuModel = new MaterialModel.MultipleMenuModel()
 
 	dotModel: MaterialModel.DotModel = new MaterialModel.DotModel()
@@ -74,7 +72,7 @@ struct Index {
             this.multipleSelectMenu.push({
                 value: 'Option ' + i,
                 id: i,
-                is_checked: c
+                isChecked: c
             })
         })
     }
@@ -89,7 +87,6 @@ struct Index {
               .width('80%')
             Row({space: 10}) {
                 MaterialSelect({
-					name: this.name,
                     menu: this.selectMenu,
                     onSelect: (it: MenuOption) => {
                         console.log(it.value)
@@ -98,9 +95,8 @@ struct Index {
 					menuModel: this.selectMenuModel
                 })
                 MultipleSelect({
-					name: this.multipleSelectName,
                     menu: this.multipleSelectMenu,
-                    onSelect: (itL: MultipleMenuSelection[]) => {
+                    onSelect: (itL: MultipleMenuOption[]) => {
 						itL.forEach((it) => {
 							console.log(it.value)
 						})
@@ -116,7 +112,7 @@ struct Index {
 						.fontWeight(FontWeight.Bold)
 					MaterialDotMenu({
 						menu: this.dotMenu,
-						onSelect: (it: DotMenuSelection) => {
+						onSelect: (it: DotMenuOption) => {
 							console.log(it.id + ' ' + it.value)
 						},
 						menuModel: this.dotMenuModel
