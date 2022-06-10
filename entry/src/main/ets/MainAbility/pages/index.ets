@@ -1,45 +1,77 @@
-// make index ui
-// 100 % width for file container
-// material file to dot menu
-// use list
-// remove scroller
-// camel case variables
-// give max 2 line support
-// remove item width
-// text color
-// border width
-// background color
 // aboutToAppear works before rendering
+// add functionality for selection color
 
 import {
-    Select,
+    MaterialSelect,
     MenuOption,
     MultipleSelect,
     MultipleMenuOption,
     MultipleMenuSelection,
-    DotMenu
+    MaterialDotMenu,
+	DotMenuOption,
+	DotMenuSelection
 } from '../common/select'
+
+import {
+	MaterialModel
+} from '../common/materialModel'
 
 @Entry
 @Component
 struct Index {
-    @State message: string = 'Hello World'
-    @State select_menu: MenuOption[] = []
+	name: string = 'Industry'
+	placeholder: string = 'select'
+    selectMenu: MenuOption[] = []
     @State selection: MenuOption = {value: "", id: -1}
-    multiple_select_menu: MultipleMenuOption[] = []
+	selectModel: MaterialModel.Model = new MaterialModel.Model()
+	selectMenuModel: MaterialModel.MenuModel = new MaterialModel.MenuModel()
+
+	multipleSelectName: string = 'Use Case'
+    multipleSelectMenu: MultipleMenuOption[] = []
     @State multiple_selection: MultipleMenuSelection[] = []
-    desc: string = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam et pellentesque nisl. Nulla accumsan at leo vel finibus. Pellentesque dictum tempus tortor nec tempus. Proin tincidunt augue eros, eu tincidunt orci tempus posuere. Etiam suscipit ligula nec lacus maximus pellentesque. Aliquam blandit tincidunt justo, ac rhoncus nunc suscipit id. Duis sodales malesuada orci, id bibendum mauris ultricies eu. Etiam congue volutpat metus, eu volutpat tortor accumsan vitae. Nam blandit, turpis ut bibendum fermentum, ex arcu ultrices mi, suscipit dignissim ante mi vel purus. Nunc magna ipsum, sollicitudin et erat et, placerat finibus lorem. Integer nisl elit, interdum non maximus nec, luctus ut ligula. Vestibulum facilisis lorem varius, suscipit urna eget, convallis velit. Maecenas consectetur in arcu sit amet malesuada. Etiam gravida velit non accumsan finibus. Ut id lacus ultrices, lacinia quam ac, dapibus enim. Etiam sed velit vulputate, pellentesque urna et, sodales tortor."
+	multipleSelectModel: MaterialModel.Model = new MaterialModel.Model()
+	multipleMenuModel: MaterialModel.MultipleMenuModel = new MaterialModel.MultipleMenuModel()
+
+	dotModel: MaterialModel.DotModel = new MaterialModel.DotModel()
+	dotMenuModel: MaterialModel.DotMenuModel = new MaterialModel.DotMenuModel()
+	dotMenu: DotMenuOption[] = [
+		{
+			value: 'Preview',
+			id: 0,
+			icon: $r('app.media.preview'),
+		},
+		{
+			value: 'Get Link',
+			id: 1,
+			icon: $r('app.media.get_link'),
+		},
+		{
+			value: 'Download',
+			id: 2,
+			icon: $r('app.media.download'),
+		},
+		{
+			value: 'Share',
+			id: 3,
+			icon: $r('app.media.share'),
+		},
+		{
+			value: 'Preview',
+			id: 0,
+			icon: $r('app.media.preview'),
+		},
+	]
 
     aboutToAppear() {
         for(let i = 0; i <= 10; i++) {
-            this.select_menu.push({
+            this.selectMenu.push({
                 value: 'Option ' + i,
                 id: i
             })
         }
         let options = [true, false, true, false, true, true]
         options.forEach((c, i) => {
-            this.multiple_select_menu.push({
+            this.multipleSelectMenu.push({
                 value: 'Option ' + i,
                 id: i,
                 is_checked: c
@@ -55,33 +87,53 @@ struct Index {
                 Image($r('app.media.categories')).height(24).width(24).objectFit(ImageFit.Contain)
             }
               .width('80%')
-            Row() {
-//                Select({
-//                    menu: this.select_menu,
-//                    select: (it: MenuOption) => {
-//                        console.log(it.value)
-//                    },
-//                    background_color: Color.Pink
-//                })
-//                MultipleSelect({
-//                    menu: this.multiple_select_menu,
-//                    select: (itL: MultipleMenuSelection[]) => {
-//                        itL.forEach((it) => {
-//                            console.log(it.value)
-//                        })
-//                    },
-//                    background_color: Color.Pink
-//                })
-            }
-            DotMenu({text: this.desc})
-            Button("Test").onClick(() => {
-                console.log("Select: " + this.selection.value + ", " + this.selection.id)
-                this.multiple_selection.forEach((it) => {
-                    console.log("Multiple Select: " + it.value + ", " + it.id)
+            Row({space: 10}) {
+                MaterialSelect({
+					name: this.name,
+                    menu: this.selectMenu,
+                    onSelect: (it: MenuOption) => {
+                        console.log(it.value)
+                    },
+					model: this.selectModel,
+					menuModel: this.selectMenuModel
                 })
-            })
+                MultipleSelect({
+					name: this.multipleSelectName,
+                    menu: this.multipleSelectMenu,
+                    onSelect: (itL: MultipleMenuSelection[]) => {
+						itL.forEach((it) => {
+							console.log(it.value)
+						})
+					},
+					model: this.multipleSelectModel,
+					menuModel: this.multipleMenuModel
+                })
+            }
+			Column({space: 10}) {
+				Flex({justifyContent: FlexAlign.SpaceBetween}) {
+					Text('File')
+						.fontSize(18)
+						.fontWeight(FontWeight.Bold)
+					MaterialDotMenu({
+						menu: this.dotMenu,
+						onSelect: (it: DotMenuSelection) => {
+							console.log(it.id + ' ' + it.value)
+						},
+						menuModel: this.dotMenuModel
+					})
+				}
+				Text('Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris accumsan mi ligula. Sed mollis augue vel dolor hendrerit maximus. Vestibulum mollis euismod ornare. Curabitur eleifend pretium fermentum. Donec eget ipsum sed felis ultricies iaculis in et dolor. Phasellus in velit efficitur, fermentum ante sed, volutpat sem. In tempus lobortis lacinia. Proin a tincidunt justo.')
+					.fontSize(14)
+					.fontColor('#9CA2C7')
+					.maxLines(2)
+					.textOverflow({overflow: TextOverflow.Ellipsis})
+			}
+				.width("80%")
+				.padding(5)
+				.borderWidth(1)
+				.borderRadius(4)
         }
-            .width('100%')
+            .width('80%')
             .margin({left: 10, right: 10, top: 10, bottom: 10})
     }
 }

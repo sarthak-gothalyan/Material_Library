@@ -8,9 +8,7 @@ export class MenuOption {
 }
 
 @Component
-export struct Select {
-	// should menu item have height width or only font size
-
+export struct MaterialSelect {
     // initialize selection
 	name: string = 'Select'
     menu: MenuOption[]
@@ -21,11 +19,11 @@ export struct Select {
     width: number = 185
     height: number = 60
     fontSize: number = 18
-    backgroundColor: ResourceColor | string = Color.White;
-    borderColor: ResourceColor | string = '#d4d4d4';
+    backgroundColor: ResourceColor | string = Color.White
+    borderColor: ResourceColor | string = '#d4d4d4'
 
     // single menu item
-    @Builder MenuItem(option: MenuOption) {
+    @Builder MenuItem(option: MenuOption, ind: number) {
         Row() {
             Text(option.value)
 				.fontSize(this.menuModel.fontSize)
@@ -45,8 +43,8 @@ export struct Select {
     // the complete menu
     @Builder MenuBuilder() {
         Column() {
-            ForEach(this.menu, (item) => {
-                this.MenuItem(item)
+            ForEach(this.menu, (item, i) => {
+                this.MenuItem(item, i)
             })
         }
             .width(this.menuModel.width)
@@ -107,9 +105,9 @@ export struct MultipleSelect {
 	name: string = 'Multiple Select'
     @State menu: MultipleMenuOption[] = []
     private selected: MultipleMenuSelection[] = []
-    select: (itemList: MultipleMenuSelection[]) => void
+	onSelect: (itemList: MultipleMenuSelection[]) => void
 	@State model: MaterialModel.Model = new MaterialModel.Model()
-	@State menuModel: MaterialModel.MultipleMenuModel = new MultipleMenuModel()
+	@State menuModel: MaterialModel.MultipleMenuModel = new MaterialModel.MultipleMenuModel()
 
     aboutToAppear() {
         let choices = []
@@ -120,7 +118,7 @@ export struct MultipleSelect {
             }
         }
         this.selected = choices
-        this.select(this.selected)
+        this.onSelect(this.selected)
     }
 
     // single menu item
@@ -152,7 +150,7 @@ export struct MultipleSelect {
                 }
                 this.menu = list
                 this.selected = choices
-                this.select(this.selected)
+                this.onSelect(this.selected)
             })
     }
 
@@ -196,88 +194,65 @@ export struct MultipleSelect {
 }
 
 // ############################ file material select component
-class FileOption {
-    value: string
-    icon?: Resource | string
+export class DotMenuOption {
+	icon?: string | Resource
+	value: string
+	id: number | string
+}
+
+export class DotMenuSelection {
+	value: string
+	id: number | string
 }
 
 @Component
-export struct DotMenu {
-    width: number = 380
-    height: number = 96
-    fontSize: number = 18;
-    placeholder: string = 'File'
-    text: string = "lore ipsum"
+export struct MaterialDotMenu {
+	menu: DotMenuOption[] = []
+	height: number | string = 24
+	width: number | string = 24
+	onSelect: (it: DotMenuSelection) => any
+	@State model: MaterialModel.DotModel = new MaterialModel.DotModel()
+    @State menuModel: MaterialModel.DotMenuModel = new MaterialModel.DotMenuModel()
 
     // single menu item
-    @Builder MenuItem(option: FileOption, index: number) {
+    @Builder MenuItem(option: DotMenuOption) {
         Row({space: 12}) {
             Image(option.icon)
                 .objectFit(ImageFit.Contain)
                 .width(18)
                 .height(18)
             Text(option.value)
-                .fontSize(16)
+                .fontSize(this.menuModel.fontSize)
+				.fontColor(this.menuModel.fontColor)
                 .fontWeight(FontWeight.Bold)
-                .height(21)
-                .width(185 - (47 + 12))
         }
-            .height(15 + 21 + 15)
-            .width(185)
+            .height(this.menuModel.height)
+            .width(this.menuModel.width)
             .onClick(() => {
-                console.log("" + index + ": " + option.value)
+				this.onSelect({value: option.value, id: option.id})
             })
     }
 
     // complete menu
     @Builder MenuBuilder() {
         Column() {
-            this.MenuItem({value: "Preview", icon: $r('app.media.preview')}, 0)
-            this.MenuItem({value: "Share", icon: $r('app.media.share')}, 1)
-            this.MenuItem({value: "Get Link", icon: $r('app.media.get_link')}, 2)
-            Divider().strokeWidth(1).color('#d4d4d4')
-            this.MenuItem({value: "Remove", icon: $r('app.media.remove')}, 3)
-            this.MenuItem({value: "Download", icon: $r('app.media.download')}, 4)
+            ForEach(this.menu, (it) => {
+				this.MenuItem(it)
+			})
         }
-            .width(185)
+            .width(this.menuModel.width)
             .padding({top: 7, bottom: 7})
-            .borderRadius(4)
+			.borderRadius(this.menuModel.borderRadius)
     }
 
     build() {
-        Column({space: 8}) {
-            Row() {
-                Text(this.placeholder)
-                    .fontSize(this.fontSize)
-                    .fontWeight(FontWeight.Bold)
-                    .fontColor('#333F48')
-                    .width(this.width - (16 + 279))
-                    .height(this.height - (16 + 56))
-                    .textOverflow({overflow: TextOverflow.Ellipsis})
-                Image($r('app.media.dot_menu'))
-                    .height(26)
-                    .width(6)
-                    .objectFit(ImageFit.Contain)
-                    .opacity(0.5)
-                    .bindMenu(this.MenuBuilder)
-            }
-                .width(this.width - (16+16))
-                .height(26)
-                .justifyContent(FlexAlign.SpaceBetween)
-                .margin({top: 16})
-            Text(this.text)
-                .fontSize(14)
-                .fontColor('#9CA2C7')
-                .height(this.height - (48 + 12))
-                .width(this.width - (16 + 56))
-                .textOverflow({overflow: TextOverflow.Ellipsis})
-                .margin({left: 16, right: 56})
-        }
-            .width(this.width)
-            .height(this.height)
-            .justifyContent(FlexAlign.SpaceBetween)
-            .borderWidth(1)
-            .borderColor('#9CA2C7')
-            .borderRadius(4)
-    }
+		Image($r('app.media.dot_menu'))
+			.height(this.model.height)
+			.width(this.model.width)
+			.borderColor(this.model.borderColor)
+			.borderRadius(this.model.borderRadius)
+			.borderWidth(this.model.borderWidth)
+			.objectFit(ImageFit.Contain)
+			.bindMenu(this.MenuBuilder())
+	}
 }
