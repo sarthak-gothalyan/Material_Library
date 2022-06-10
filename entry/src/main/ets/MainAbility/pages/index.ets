@@ -1,6 +1,3 @@
-// aboutToAppear works before rendering
-// add functionality for selection color
-
 import {
     MaterialSelect,
     MenuOption,

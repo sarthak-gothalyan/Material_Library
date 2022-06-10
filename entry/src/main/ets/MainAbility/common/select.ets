@@ -1,7 +1,11 @@
+// change bind menu border radius
+// change bind menu not scrollable
+// fix any clipping issues
+
 // import model class
 import { MaterialModel } from './materialModel'
 
-// ############################ single material select component
+// ############################ single material select
 export class MenuOption {
     value: string
     id: string | number
@@ -36,7 +40,7 @@ export struct MaterialSelect {
             })
     }
 
-    // the complete menu
+    // complete menu
     @Builder MenuBuilder() {
         Column() {
             ForEach(this.menu, (item, i) => {
@@ -82,7 +86,7 @@ export struct MaterialSelect {
     }
 }
 
-// ############################ multiple material select component
+// ############################ multiple material select
 export class MultipleMenuOption {
     value: string
     id: any
@@ -187,7 +191,7 @@ export struct MultipleSelect {
     }
 }
 
-// ############################ file material select component
+// ############################ dot material menu
 export class DotMenuOption {
 	icon?: string | Resource
 	value: string
