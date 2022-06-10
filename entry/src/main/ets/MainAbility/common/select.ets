@@ -15,13 +15,31 @@ export class MenuOption {
 export struct MaterialSelect {
     // initialize selection
     menu: MenuOption[]
-    onSelect: (item: MenuOption) => void
+    onSelect: (item: MenuOption) => any
 	@State model: MaterialModel.Model = new MaterialModel.Model('')
 	@State menuModel: MaterialModel.MenuModel = new MaterialModel.MenuModel()
-	@State selected: number = -1
+	private selected: number = -1
+
+	// replace null values
+	aboutToAppear() {
+		console.log(this.model + ' ')
+		if(this.model == null || this.model == undefined) {
+			this.model = new MaterialModel.Model('')
+		}
+		if(this.menuModel == null || this.menuModel == undefined) {
+			this.menuModel = new MaterialModel.MenuModel()
+		}
+		if(this.onSelect == null || this.onSelect == undefined) {
+			this.onSelect = (it: MenuOption) => {}
+		}
+		if(this.menu == null || this.menu == undefined) {
+			this.menu = []
+		}
+	}
 
     // single menu item
-    @Builder MenuItem(option: MenuOption, index: number) {
+    @Builder
+	MenuItem(option: MenuOption, index: number) {
         Row() {
             Text(option.value)
 				.fontSize(this.menuModel.getFontSize())
@@ -41,7 +59,8 @@ export struct MaterialSelect {
     }
 
     // complete menu
-    @Builder MenuBuilder() {
+    @Builder
+	MenuBuilder() {
         Column() {
             ForEach(this.menu, (item, i) => {
                 this.MenuItem(item, i)
@@ -99,11 +118,24 @@ export struct MultipleSelect {
 
     @State menu: MultipleMenuOption[] = []
     private selected: MultipleMenuOption[] = []
-	onSelect: (itemList: MultipleMenuOption[]) => void
+	onSelect: (itemList: MultipleMenuOption[]) => any
 	@State model: MaterialModel.Model = new MaterialModel.Model('')
 	@State menuModel: MaterialModel.MultipleMenuModel = new MaterialModel.MultipleMenuModel()
 
+	// replace null values
     aboutToAppear() {
+		if(this.model == null || this.model == undefined) {
+			this.model = new MaterialModel.Model('')
+		}
+		if(this.menuModel == null || this.menuModel == undefined) {
+			this.menuModel = new MaterialModel.MultipleMenuModel()
+		}
+		if(this.onSelect == null || this.onSelect == undefined) {
+			this.onSelect = (it: MultipleMenuOption[]) => {}
+		}
+		if(this.menu == null || this.menu == undefined) {
+			this.menu = []
+		}
         let choices = []
         for (let i = 0; i < this.menu.length; i++) {
             let m = this.menu[i]
@@ -119,7 +151,8 @@ export struct MultipleSelect {
     }
 
     // single menu item
-    @Builder MenuItem(option: MultipleMenuOption, index: number) {
+    @Builder
+	MenuItem(option: MultipleMenuOption, index: number) {
         Row({space: 9}) {
             Checkbox({name: option.value,  group: "check"})
                 .select(option.isChecked)
@@ -153,7 +186,8 @@ export struct MultipleSelect {
     }
 
     // complete menu
-    @Builder MenuBuilder() {
+    @Builder
+	MenuBuilder() {
     Column() {
         ForEach(this.menu, (item, i) => {
             this.MenuItem(item, i)
@@ -205,8 +239,25 @@ export struct MaterialDotMenu {
 	@State model: MaterialModel.DotModel = new MaterialModel.DotModel()
     @State menuModel: MaterialModel.DotMenuModel = new MaterialModel.DotMenuModel()
 
+	// replace null values
+	aboutToAppear() {
+		if(this.model == null || this.model == undefined) {
+			this.model = new MaterialModel.DotModel()
+		}
+		if(this.menuModel == null || this.menuModel == undefined) {
+			this.menuModel = new MaterialModel.DotMenuModel()
+		}
+		if(this.onSelect == null || this.onSelect == undefined) {
+			this.onSelect = (it: DotMenuOption) => {}
+		}
+		if(this.menu == null || this.menu == undefined) {
+			this.menu = []
+		}
+	}
+
     // single menu item
-    @Builder MenuItem(option: DotMenuOption) {
+    @Builder
+	MenuItem(option: DotMenuOption) {
         Row({space: 12}) {
             Image(option.icon)
                 .objectFit(ImageFit.Contain)
@@ -225,7 +276,8 @@ export struct MaterialDotMenu {
     }
 
     // complete menu
-    @Builder MenuBuilder() {
+    @Builder
+	MenuBuilder() {
         Column() {
             ForEach(this.menu, (it) => {
 				this.MenuItem(it)
@@ -237,13 +289,15 @@ export struct MaterialDotMenu {
     }
 
     build() {
-		Image($r('app.media.dot_menu'))
-			.height(this.model.getHeight())
-			.width(this.model.getWidth())
-			.borderColor(this.model.getBorderColor())
-			.borderRadius(this.model.getBorderRadius())
-			.borderWidth(this.model.getBorderWidth())
-			.objectFit(ImageFit.Contain)
-			.bindMenu(this.MenuBuilder())
+		Row() {
+			Image($r('app.media.dot_menu'))
+				.height(this.model.getHeight())
+				.width(this.model.getWidth())
+				.borderColor(this.model.getBorderColor())
+				.borderRadius(this.model.getBorderRadius())
+				.borderWidth(this.model.getBorderWidth())
+				.objectFit(ImageFit.Contain)
+				.bindMenu(this.MenuBuilder())
+		}
 	}
 }

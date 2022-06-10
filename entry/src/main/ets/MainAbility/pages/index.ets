@@ -58,6 +58,31 @@ struct Index {
 	]
 
     aboutToAppear() {
+		this.selectModel.setBackgroundColor(null)
+		this.selectModel.setBorderColor(null)
+		this.selectModel.setBorderRadius(null)
+		this.selectModel.setBorderWidth(null)
+		this.selectModel.setSelectedColor(null)
+		this.selectMenuModel.setBorderRadius(null)
+		this.selectMenuModel.setBackgroundColor(null)
+		this.selectMenuModel.setFontSize(null)
+
+		this.multipleSelectModel.setPlaceholder(null)
+		this.multipleSelectModel.setBackgroundColor(null)
+		this.multipleSelectModel.setBorderColor(null)
+		this.multipleSelectModel.setBorderRadius(null)
+		this.multipleSelectModel.setBorderWidth(null)
+		this.multipleMenuModel.setFontSize(null)
+		this.multipleMenuModel.setBackgroundColor(null)
+		this.multipleMenuModel.setCheckBoxHeight(null)
+
+		this.dotModel.setBorderWidth(null)
+		this.dotModel.setBorderRadius(null)
+		this.dotModel.setBackgroundColor(null)
+		this.dotMenuModel.setBackgroundColor(null)
+		this.dotMenuModel.setFontSize(null)
+		this.dotMenuModel.setIconHeight(null)
+
         for(let i = 0; i <= 10; i++) {
             this.selectMenu.push({
                 value: 'Option ' + i,
@@ -88,8 +113,7 @@ struct Index {
                     onSelect: (it: MenuOption) => {
                         console.log(it.value)
                     },
-					model: this.selectModel,
-					menuModel: this.selectMenuModel
+					model: this.selectModel
                 })
                 MultipleSelect({
                     menu: this.multipleSelectMenu,
@@ -112,6 +136,7 @@ struct Index {
 						onSelect: (it: DotMenuOption) => {
 							console.log(it.id + ' ' + it.value)
 						},
+						model: this.dotModel,
 						menuModel: this.dotMenuModel
 					})
 				}

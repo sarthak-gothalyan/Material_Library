@@ -16,8 +16,12 @@ export namespace MaterialModel {
 		private selectedColor: string | Color = '#F0F3FF'
 
 		constructor(title: string, placeholder?: string) {
-			this.title = title
-			if(placeholder != null) this.placeholder = placeholder
+			if(title != null || title != undefined) {
+				this.title = title
+			}
+			if(placeholder != null || placeholder != undefined) {
+				this.placeholder = placeholder
+			}
 		}
 
 		getTitle(): string {
@@ -25,6 +29,10 @@ export namespace MaterialModel {
 		}
 
 		setPlaceholder(placeholder: string): Model {
+			if(placeholder == null || placeholder == undefined) {
+				this.placeholder = ''
+				return this
+			}
 			this.placeholder = placeholder
 			return this
 		}
@@ -33,6 +41,10 @@ export namespace MaterialModel {
 		}
 
 		setTitleFontSize(titleFontSize: number | string): Model {
+			if(titleFontSize == null || titleFontSize == undefined) {
+				this.titleFontSize = 14
+				return this
+			}
 			this.titleFontSize = titleFontSize
 			return this
 		}
@@ -41,6 +53,10 @@ export namespace MaterialModel {
 		}
 
 		setHeight(height: number | string): Model {
+			if(height == null || height == undefined) {
+				this.height = 60
+				return this
+			}
 			this.height = height
 			return this
 		}
@@ -49,6 +65,10 @@ export namespace MaterialModel {
 		}
 
 		setWidth(width: number | string): Model {
+			if(width == null || width == undefined) {
+				this.width = 120
+				return this
+			}
 			this.width = width
 			return this
 		}
@@ -57,6 +77,10 @@ export namespace MaterialModel {
 		}
 
 		setFontSize(fontSize: number | string): Model {
+			if(fontSize == null || fontSize == undefined) {
+				this.fontSize = 18
+				return this
+			}
 			this.fontSize = fontSize
 			return this
 		}
@@ -65,6 +89,10 @@ export namespace MaterialModel {
 		}
 
 		setFontColor(fontColor: string | Color): Model {
+			if(fontColor == null || fontColor == undefined) {
+				this.fontColor = '#333F48'
+				return this
+			}
 			this.fontColor = fontColor
 			return this
 		}
@@ -73,6 +101,10 @@ export namespace MaterialModel {
 		}
 
 		setBackgroundColor(backgroundColor: string | Color): Model {
+			if(backgroundColor == null || backgroundColor == undefined) {
+				this.backgroundColor = Color.White
+				return this
+			}
 			this.backgroundColor = backgroundColor
 			return this
 		}
@@ -81,6 +113,10 @@ export namespace MaterialModel {
 		}
 
 		setBorderWidth(borderWidth: number | string): Model {
+			if(borderWidth == null || borderWidth == undefined) {
+				this.borderWidth = 1
+				return this
+			}
 			this.borderWidth = borderWidth
 			return this
 		}
@@ -89,6 +125,10 @@ export namespace MaterialModel {
 		}
 
 		setBorderRadius(borderRadius: number | string): Model {
+			if(borderRadius == null || borderRadius == undefined) {
+				this.borderRadius = 4
+				return this
+			}
 			this.borderRadius = borderRadius
 			return this
 		}
@@ -97,6 +137,10 @@ export namespace MaterialModel {
 		}
 
 		setBorderColor(borderColor: string | Color): Model {
+			if(borderColor == null || borderColor == undefined) {
+				this.borderColor = '#9CA2C7'
+				return this
+			}
 			this.borderColor = borderColor
 			return this
 		}
@@ -105,6 +149,10 @@ export namespace MaterialModel {
 		}
 
 		setUnselectedColor(unselectedColor: string | Color): Model {
+			if(unselectedColor == null || unselectedColor == undefined) {
+				this.unselectedColor = Color.White
+				return this
+			}
 			this.unselectedColor = unselectedColor
 			return this
 		}
@@ -113,6 +161,10 @@ export namespace MaterialModel {
 		}
 
 		setSelectedColor(selectedColor: string | Color): Model {
+			if(selectedColor == null || selectedColor == undefined) {
+				this.selectedColor = '#F0F3FF'
+				return this
+			}
 			this.selectedColor = selectedColor
 			return this
 		}
@@ -125,11 +177,15 @@ export namespace MaterialModel {
 		private height: number | string = 40
 		private width: number | string = 150
 		private fontSize: number | string = 14
-		private fontColor: string | Color = Color.Black
+		private fontColor: string | Color = '#333F48'
 		private backgroundColor: string | Color = Color.White
 		private borderRadius: number | string = 0
 
 		setHeight(height: number | string): MenuModel {
+			if(height == null || height == undefined) {
+				this.height = 40
+				return this
+			}
 			this.height = height
 			return this
 		}
@@ -138,6 +194,10 @@ export namespace MaterialModel {
 		}
 
 		setWidth(width: number | string): MenuModel {
+			if(width == null || width == undefined) {
+				this.width = 150
+				return this
+			}
 			this.width = width
 			return this
 		}
@@ -146,6 +206,10 @@ export namespace MaterialModel {
 		}
 
 		setFontSize(fontSize: number | string): MenuModel {
+			if(fontSize == null || fontSize == undefined) {
+				this.fontSize = 14
+				return this
+			}
 			this.fontSize = fontSize
 			return this
 		}
@@ -154,6 +218,10 @@ export namespace MaterialModel {
 		}
 
 		setFontColor(fontColor: string | Color): MenuModel {
+			if(fontColor == null || fontColor == undefined) {
+				this.fontColor = '#333F48'
+				return this
+			}
 			this.fontColor = fontColor
 			return this
 		}
@@ -162,6 +230,10 @@ export namespace MaterialModel {
 		}
 
 		setBackgroundColor(backgroundColor: string | Color): MenuModel {
+			if(backgroundColor == null || backgroundColor == undefined) {
+				this.backgroundColor = Color.White
+				return this
+			}
 			this.backgroundColor = backgroundColor
 			return this
 		}
@@ -170,6 +242,10 @@ export namespace MaterialModel {
 		}
 
 		setBorderRadius(borderRadius: number | string): MenuModel {
+			if(borderRadius == null || borderRadius == undefined) {
+				this.borderRadius = 0
+				return this
+			}
 			this.borderRadius = borderRadius
 			return this
 		}
@@ -184,6 +260,10 @@ export namespace MaterialModel {
 		private checkBoxWidth: number | string = 24
 
 		setCheckColor(checkColor: string | Color): MultipleMenuModel {
+			if(checkColor == null || checkColor == undefined) {
+				this.checkColor = Color.Blue
+				return this
+			}
 			this.checkColor = checkColor
 			return this
 		}
@@ -192,6 +272,10 @@ export namespace MaterialModel {
 		}
 
 		setCheckBoxHeight(checkBoxHeight: number | string): MultipleMenuModel {
+			if(checkBoxHeight == null || checkBoxHeight == undefined) {
+				this.checkBoxHeight = 24
+				return this
+			}
 			this.checkBoxHeight = checkBoxHeight
 			return this
 		}
@@ -200,6 +284,10 @@ export namespace MaterialModel {
 		}
 
 		setCheckBoxWidth(checkBoxWidth: number | string): MultipleMenuModel {
+			if(checkBoxWidth == null || checkBoxWidth == undefined) {
+				this.checkBoxWidth = 24
+				return this
+			}
 			this.checkBoxHeight = checkBoxWidth
 			return this
 		}
@@ -214,9 +302,13 @@ export namespace MaterialModel {
 		private backgroundColor: string | Color = Color.White
 		private borderWidth: number | string = 1
 		private borderRadius: number | string = 4
-		private borderColor: string | Color = Color.Black
+		private borderColor: string | Color = '#9CA2C7'
 
 		setHeight(height: number | string): DotModel {
+			if(height == null || height == undefined) {
+				this.height = 24
+				return this
+			}
 			this.height = height
 			return this
 		}
@@ -225,6 +317,10 @@ export namespace MaterialModel {
 		}
 
 		setWidth(width: number | string): DotModel {
+			if(width == null || width == undefined) {
+				this.width = 24
+				return this
+			}
 			this.width = width
 			return this
 		}
@@ -233,6 +329,10 @@ export namespace MaterialModel {
 		}
 
 		setBackgroundColor(backgroundColor: string | Color): DotModel {
+			if(backgroundColor == null || backgroundColor == undefined) {
+				this.backgroundColor = Color.White
+				return this
+			}
 			this.backgroundColor = backgroundColor
 			return this
 		}
@@ -241,6 +341,10 @@ export namespace MaterialModel {
 		}
 
 		setBorderWidth(borderWidth: number | string): DotModel {
+			if(borderWidth == null || borderWidth == undefined) {
+				this.borderWidth = 1
+				return this
+			}
 			this.borderWidth = borderWidth
 			return this
 		}
@@ -249,6 +353,10 @@ export namespace MaterialModel {
 		}
 
 		setBorderRadius(borderRadius: number | string): DotModel {
+			if(borderRadius == null || borderRadius == undefined) {
+				this.borderRadius = 4
+				return this
+			}
 			this.borderRadius = borderRadius
 			return this
 		}
@@ -257,6 +365,10 @@ export namespace MaterialModel {
 		}
 
 		setBorderColor(borderColor: string | Color): DotModel {
+			if(borderColor == null || borderColor == undefined) {
+				this.borderColor = '#9CA2C7'
+				return this
+			}
 			this.borderColor = borderColor
 			return this
 		}
@@ -270,6 +382,10 @@ export namespace MaterialModel {
 		private iconWidth: number | string = 18
 
 		setIconHeight(iconHeight: number | string): DotMenuModel {
+			if(iconHeight == null || iconHeight == undefined) {
+				this.iconHeight = 18
+				return this
+			}
 			this.iconHeight = iconHeight
 			return this
 		}
@@ -278,6 +394,10 @@ export namespace MaterialModel {
 		}
 
 		setIconWidth(iconWidth: number | string): DotMenuModel {
+			if(iconWidth == null || iconWidth == undefined) {
+				this.iconWidth = 18
+				return this
+			}
 			this.iconWidth = iconWidth
 			return this
 		}
