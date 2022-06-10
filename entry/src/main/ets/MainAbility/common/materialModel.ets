@@ -1,120 +1,120 @@
 // make functions to change properties
 export namespace MaterialModel {
 	export class Model {
-		title: string = ''
-		titleFontSize: number | string = 14
-		placeholder: string = 'Select'
-		height: number | string = 60
-		width: number | string = 100
-		fontSize: number | string = 18
-		fontColor: string | Color = '#333F48'
-		backgroundColor: string | Color = Color.White
-		borderWidth: number | string = 1
-		borderRadius: number | string = 4
-		borderColor: string | Color = '#9CA2C7'
+		private title: string = ''
+		private titleFontSize: number | string = 14
+		private placeholder: string = 'Select'
+		private height: number | string = 60
+		private width: number | string = 100
+		private fontSize: number | string = 18
+		private fontColor: string | Color = '#333F48'
+		private backgroundColor: string | Color = Color.White
+		private borderWidth: number | string = 1
+		private borderRadius: number | string = 4
+		private borderColor: string | Color = '#9CA2C7'
 		// add functionality for selection color
-		unselectedColor: string | Color = Color.White
-		selectedColor: string | Color = '#F0F3FF'
+		private unselectedColor: string | Color = Color.White
+		private selectedColor: string | Color = '#F0F3FF'
 
-		constructor(ttle: string, phdr?: string) {
-			this.title = ttle
-			if(phdr != null) this.placeholder = phdr
+		constructor(title: string, placeholder?: string) {
+			this.title = title
+			if(placeholder != null) this.placeholder = placeholder
 		}
 
-		getTitle(void): string {
+		getTitle(): string {
 			return this.title
 		}
 
-		setPlaceholder(phdr: string): Model {
-			this.placeholder = phdr
+		setPlaceholder(placeholder: string): Model {
+			this.placeholder = placeholder
 			return this
 		}
-		getPlaceholder(void): string {
+		getPlaceholder(): string {
 			return this.placeholder
 		}
 
-		setTitleFontSize(ttleFNTS: number | string): Model {
-			this.titleFontSize = ttleFNTS
+		setTitleFontSize(titleFontSize: number | string): Model {
+			this.titleFontSize = titleFontSize
 			return this
 		}
 		getTitleFontSize(): number | string {
 			return this.titleFontSize
 		}
 
-		setHeight(ht: number | string): Model {
-			this.height = ht
+		setHeight(height: number | string): Model {
+			this.height = height
 			return this
 		}
 		getHeight(): number | string {
 			return this.height
 		}
 
-		setWidth(wt: number | string): Model {
-			this.width = wt
+		setWidth(width: number | string): Model {
+			this.width = width
 			return this
 		}
 		getWidth(): number | string {
 			return this.width
 		}
 
-		setFontSize(fntS: number | string): Model {
-			this.fontSize = fntS
+		setFontSize(fontSize: number | string): Model {
+			this.fontSize = fontSize
 			return this
 		}
 		getFontSize(): number | string {
 			return this.fontSize
 		}
 
-		setFontColor(fntC: string | Color): Model {
-			this.fontColor = fntC
+		setFontColor(fontColor: string | Color): Model {
+			this.fontColor = fontColor
 			return this
 		}
 		getFontColor(): string | Color {
 			return this.fontColor
 		}
 
-		setBackgroundColor(bckgC: string | Color): Model {
-			this.backgroundColor = bckgC
+		setBackgroundColor(backgroundColor: string | Color): Model {
+			this.backgroundColor = backgroundColor
 			return this
 		}
 		getBackgroundColor(): string | Color {
 			return this.backgroundColor
 		}
 
-		setBorderWidth(brdW: number | string): Model {
-			this.borderWidth = brdW
+		setBorderWidth(borderWidth: number | string): Model {
+			this.borderWidth = borderWidth
 			return this
 		}
 		getBorderWidth(): number | string {
 			return this.borderWidth
 		}
 
-		setBorderRadius(brdR: number | string): Model {
-			this.borderRadius = brdR
+		setBorderRadius(borderRadius: number | string): Model {
+			this.borderRadius = borderRadius
 			return this
 		}
 		getBorderRadius(): number | string {
 			return this.borderRadius
 		}
 
-		setBorderColor(brdC: string | Color): Model {
-			this.borderColor = brdc
+		setBorderColor(borderColor: string | Color): Model {
+			this.borderColor = borderColor
 			return this
 		}
 		getBorderColor(): string | Color {
 			return this.borderColor
 		}
 
-		setUnselectedColor(UnselectedColor: string | Color): Model {
-			this.unselectedColor = UnselectedColor
+		setUnselectedColor(unselectedColor: string | Color): Model {
+			this.unselectedColor = unselectedColor
 			return this
 		}
 		getUnselectedColor(): string | Color {
 			return this.unselectedColor
 		}
 
-		setSelectedColor(slctC: string | Color): Model {
-			this.selectedColor = slctC
+		setSelectedColor(selectedColor: string | Color): Model {
+			this.selectedColor = selectedColor
 			return this
 		}
 		getSelectedColor(): string | Color {
@@ -123,34 +123,154 @@ export namespace MaterialModel {
 	}
 
 	export class MenuModel {
-		height: number | string = 20
-		width: number | string = 150
-		fontSize: number | string = 14
-		fontColor: string | Color = Color.Black
-		backgroundColor: string | Color = Color.White
-		borderRadius: number | string = 0
+		private height: number | string = 20
+		private width: number | string = 150
+		private fontSize: number | string = 14
+		private fontColor: string | Color = Color.Black
+		private backgroundColor: string | Color = Color.White
+		private borderRadius: number | string = 0
+
+		setHeight(height: number | string): MenuModel {
+			this.height = height
+			return this
+		}
+		getHeight(): number | string {
+			return this.height
+		}
+
+		setWidth(width: number | string): MenuModel {
+			this.width = width
+			return this
+		}
+		getWidth(): number | string {
+			return this.width
+		}
+
+		setFontSize(fontSize: number | string): MenuModel {
+			this.fontSize = fontSize
+			return this
+		}
+		getFontSize(): number | string {
+			return this.fontSize
+		}
+
+		setFontColor(fontColor: string | Color): MenuModel {
+			this.fontColor = fontColor
+			return this
+		}
+		getFontColor(): string | Color {
+			return this.fontColor
+		}
+
+		setBackgroundColor(backgroundColor: string | Color): MenuModel {
+			this.backgroundColor = backgroundColor
+			return this
+		}
+		getBackgroundColor(): string | Color {
+			return this.backgroundColor
+		}
+
+		setBorderRadius(borderRadius: number | string): MenuModel {
+			this.borderRadius = borderRadius
+			return this
+		}
+		getBorderRadius(): number | string {
+			return this.borderRadius
+		}
 	}
 
 	export class MultipleMenuModel extends MenuModel {
-		selectedColor: string | Color = Color.Blue
-		checkBoxHeight: number | string = 24
-		checkBoxWidth: number | string = 24
+		private checkColor: string | Color = Color.Blue
+		private checkBoxHeight: number | string = 24
+		private checkBoxWidth: number | string = 24
+
+		setCheckColor(checkColor: string | Color): MultipleMenuModel {
+			this.checkColor = checkColor
+			return this
+		}
+		getCheckColor(): string | Color {
+			return this.checkColor
+		}
+
+		setCheckBoxHeight(checkBoxHeight: number | string): MultipleMenuModel {
+			this.checkBoxHeight = checkBoxHeight
+			return this
+		}
+		getCheckBoxHeight(): number | string {
+			return this.checkBoxHeight
+		}
+
+		setCheckBoxWidth(checkBoxWidth: number | string): MultipleMenuModel {
+			this.checkBoxHeight = checkBoxWidth
+			return this
+		}
+		getCheckBoxWidth(): number | string {
+			return this.checkBoxWidth
+		}
 	}
 
 	export class DotModel {
-		height: number | string = 24
-		width: number | string = 24
-		backgroundColor: string | Color = Color.White
-		borderWidth: number | string = 1
-		borderRadius: number | string = 4
-		borderColor: string | Color = Color.Black
+		private height: number | string = 24
+		private width: number | string = 24
+		private backgroundColor: string | Color = Color.White
+		private borderWidth: number | string = 1
+		private borderRadius: number | string = 4
+		private borderColor: string | Color = Color.Black
+
+		setHeight(height: number | string): DotModel {
+			this.height = height
+			return this
+		}
+		getHeight(): number | string {
+			return this.height
+		}
+
+		setWidth(width: number | string): DotModel {
+			this.width = width
+			return this
+		}
+		getWidth(): number | string {
+			return this.width
+		}
+
+		setBackgroundColor(backgroundColor: string | Color): DotModel {
+			this.backgroundColor = backgroundColor
+			return this
+		}
+		getBackgroundColor(): string | Color {
+			return this.backgroundColor
+		}
+
+		setBorderWidth(borderWidth: number | string): DotModel {
+			this.borderWidth = borderWidth
+			return this
+		}
+		getBorderWidth(): number | string {
+			return this.borderWidth
+		}
+
+		setBorderRadius(borderRadius: number | string): DotModel {
+			this.borderRadius = borderRadius
+			return this
+		}
+		getBorderRadius(): number | string {
+			return this.borderRadius
+		}
+
+		setBorderColor(borderColor: string | Color): DotModel {
+			this.borderColor = borderColor
+			return this
+		}
+		getBorderColor(): string | Color {
+			return this.borderColor
+		}
 	}
 
 	export class DotMenuModel extends MenuModel{
-		iconHeight: number | string = 18
-		iconWidth: number | string = 18
+		private iconHeight: number | string = 18
+		private iconWidth: number | string = 18
 
-		setIconHeight(iconHeight: number | string): Model {
+		setIconHeight(iconHeight: number | string): DotMenuModel {
 			this.iconHeight = iconHeight
 			return this
 		}
@@ -158,7 +278,7 @@ export namespace MaterialModel {
 			return this.iconHeight
 		}
 
-		setIconHeight(iconWidth: number | string): Model {
+		setIconWidth(iconWidth: number | string): DotMenuModel {
 			this.iconWidth = iconWidth
 			return this
 		}

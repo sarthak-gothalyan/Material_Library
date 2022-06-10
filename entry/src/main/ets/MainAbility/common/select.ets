@@ -12,7 +12,7 @@ export struct MaterialSelect {
     // initialize selection
     menu: MenuOption[]
     onSelect: (item: MenuOption) => void
-	@State model: MaterialModel.Model = new MaterialModel.Model()
+	@State model: MaterialModel.Model = new MaterialModel.Model('')
 	@State menuModel: MaterialModel.MenuModel = new MaterialModel.MenuModel()
 
     // single menu item
@@ -93,7 +93,7 @@ export struct MultipleSelect {
     @State menu: MultipleMenuOption[] = []
     private selected: MultipleMenuOption[] = []
 	onSelect: (itemList: MultipleMenuOption[]) => void
-	@State model: MaterialModel.Model = new MaterialModel.Model()
+	@State model: MaterialModel.Model = new MaterialModel.Model('')
 	@State menuModel: MaterialModel.MultipleMenuModel = new MaterialModel.MultipleMenuModel()
 
     aboutToAppear() {
@@ -116,7 +116,7 @@ export struct MultipleSelect {
         Row({space: 9}) {
             Checkbox({name: option.value,  group: "check"})
                 .select(option.isChecked)
-                .selectedColor(this.menuModel.getSelectedColor())
+                .selectedColor(this.menuModel.getCheckColor())
                 .height(this.menuModel.getCheckBoxHeight())
                 .width(this.menuModel.getCheckBoxWidth())
                 .margin({left: 12})
