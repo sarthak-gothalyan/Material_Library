@@ -14,9 +14,10 @@ export struct MaterialSelect {
     onSelect: (item: MenuOption) => void
 	@State model: MaterialModel.Model = new MaterialModel.Model('')
 	@State menuModel: MaterialModel.MenuModel = new MaterialModel.MenuModel()
+	@State selected: number = -1
 
     // single menu item
-    @Builder MenuItem(option: MenuOption, ind: number) {
+    @Builder MenuItem(option: MenuOption, index: number) {
         Row() {
             Text(option.value)
 				.fontSize(this.menuModel.getFontSize())
@@ -27,8 +28,10 @@ export struct MaterialSelect {
         }
             .height(this.menuModel.getHeight())
 			.width(this.menuModel.getWidth())
+			.backgroundColor(this.selected == index ? this.model.getSelectedColor() : this.model.getUnselectedColor())
             .onClick(() => {
                 this.model.setPlaceholder(option.value)
+				this.selected = index
                 this.onSelect(option)
             })
     }
@@ -127,6 +130,7 @@ export struct MultipleSelect {
                 .textOverflow({overflow: TextOverflow.Ellipsis})
         }
             .width(this.menuModel.getWidth())
+			.backgroundColor(this.menu[index].isChecked ? this.model.getSelectedColor() : this.model.getUnselectedColor())
             .onClick(() => {
                 this.menu[index].isChecked = !this.menu[index].isChecked
                 let list = []

@@ -123,7 +123,7 @@ export namespace MaterialModel {
 	}
 
 	export class MenuModel {
-		private height: number | string = 20
+		private height: number | string = 40
 		private width: number | string = 150
 		private fontSize: number | string = 14
 		private fontColor: string | Color = Color.Black
