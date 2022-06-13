@@ -4,12 +4,9 @@ import {
     MultipleSelect,
     MultipleMenuOption,
     MaterialDotMenu,
-	DotMenuOption
-} from '../common/select'
-
-import {
+	DotMenuOption,
 	MaterialModel
-} from '../common/materialModel'
+} from '../common/select'
 
 @Entry
 @Component
@@ -17,7 +14,7 @@ struct Index {
 	name: string = 'Industry'
 	placeholder: string = 'select'
     selectMenu: MenuOption[] = []
-    @State selection: MenuOption = {value: "", id: -1}
+    @State selection: MenuOption = new MenuOption(null, null)
 	selectModel: MaterialModel.Model = new MaterialModel.Model('Industry')
 	selectMenuModel: MaterialModel.MenuModel = new MaterialModel.MenuModel()
 
@@ -30,31 +27,10 @@ struct Index {
 	dotModel: MaterialModel.DotModel = new MaterialModel.DotModel()
 	dotMenuModel: MaterialModel.DotMenuModel = new MaterialModel.DotMenuModel()
 	dotMenu: DotMenuOption[] = [
-		{
-			value: 'Preview',
-			id: 0,
-			icon: $r('app.media.preview'),
-		},
-		{
-			value: 'Get Link',
-			id: 1,
-			icon: $r('app.media.get_link'),
-		},
-		{
-			value: 'Download',
-			id: 2,
-			icon: $r('app.media.download'),
-		},
-		{
-			value: 'Share',
-			id: 3,
-			icon: $r('app.media.share'),
-		},
-		{
-			value: 'Preview',
-			id: 0,
-			icon: $r('app.media.preview'),
-		},
+//		new DotMenuOption(null, null),
+//		new DotMenuOption(null, null, null),
+		new DotMenuOption('Get Link', 1),
+		new DotMenuOption('Download', 2, $r('app.media.download'))
 	]
 
     aboutToAppear() {
@@ -68,6 +44,7 @@ struct Index {
 		this.selectMenuModel.setBorderRadius(null)
 		this.selectMenuModel.setBackgroundColor(null)
 		this.selectMenuModel.setFontSize(null)
+		this.selectMenuModel.setPadding(null)
 		this.selectModel.setMargin(null)
 
 		this.multipleSelectModel.setWidth(null)
@@ -86,22 +63,19 @@ struct Index {
 		this.dotMenuModel.setBackgroundColor(null)
 		this.dotMenuModel.setFontSize(null)
 		this.dotMenuModel.setIconHeight(null)
+		this.dotMenuModel.setPadding(0)
 		this.dotModel.setMargin(null)
 
-        for(let i = 0; i <= 10; i++) {
-            this.selectMenu.push({
-                value: 'Option ' + i,
-                id: i
-            })
+        for(let i = 0; i <= 100; i++) {
+            this.selectMenu.push(new MenuOption('Option ' + i, i))
         }
-        let options = [true, false, true, false, true, true]
+		this.selectMenu.push(new MenuOption(null, null))
+        let options = [true, false, true, false, true, true, true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,]
         options.forEach((c, i) => {
-            this.multipleSelectMenu.push({
-                value: 'Option ' + i,
-                id: i,
-                isChecked: c
-            })
+            this.multipleSelectMenu.push(new MultipleMenuOption('Option ' + i, i, null))
         })
+		this.multipleSelectMenu.push(new MultipleMenuOption(null, null))
+		this.multipleSelectMenu.push(new MultipleMenuOption(null, null, null))
     }
 
     build() {
@@ -116,7 +90,7 @@ struct Index {
                 MaterialSelect({
                     menu: this.selectMenu,
                     onSelect: (it: MenuOption) => {
-                        console.log(it.value)
+                        console.log(it.getValue())
                     },
 					model: this.selectModel
                 })
@@ -124,7 +98,7 @@ struct Index {
                     menu: this.multipleSelectMenu,
                     onSelect: (itL: MultipleMenuOption[]) => {
 						itL.forEach((it) => {
-							console.log(it.value)
+							console.log(it.getValue())
 						})
 					},
 					model: this.multipleSelectModel,
@@ -139,7 +113,7 @@ struct Index {
 					MaterialDotMenu({
 						menu: this.dotMenu,
 						onSelect: (it: DotMenuOption) => {
-							//console.log(it.id + ' ' + it.value)
+							console.log(it.getId() + ' ' + it.getValue())
 						},
 						model: this.dotModel,
 						menuModel: this.dotMenuModel

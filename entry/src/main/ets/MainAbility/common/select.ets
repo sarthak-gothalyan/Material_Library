@@ -1,53 +1,45 @@
-// change bind menu border radius
-// make bind menu not scrollable
-// fix any clipping issues
-
-// import model namespace
 import { MaterialModel } from './materialModel'
-
-// ############################ single material select
-export class MenuOption {
-    value: string
-    id: string | number
-}
+import { MenuOption, MultipleMenuOption, DotMenuOption} from './menuOptions'
 
 @Component
-export struct MaterialSelect {
-    // initialize selection
+struct MaterialSelect {
     menu: MenuOption[]
-    onSelect: (item: MenuOption) => any
+    onSelect: (item: MenuOption) => void
 	@State model: MaterialModel.Model = new MaterialModel.Model('')
 	@State menuModel: MaterialModel.MenuModel = new MaterialModel.MenuModel()
 	private selected: number = -1
 
-    // single menu item
     @Builder
 	MenuItem(option: MenuOption, index: number) {
         Row() {
-            Text(option.value)
+            Text(option.getValue())
 				.fontSize(this.menuModel.getFontSize())
 				.fontWeight(FontWeight.Bold)
 				.maxLines(2)
 				.textOverflow({overflow: TextOverflow.Ellipsis})
-				.margin({left: 12, top: 15, bottom: 15})
         }
             .height(this.menuModel.getHeight())
 			.width(this.menuModel.getWidth())
+			.alignItems(VerticalAlign.Center)
 			.backgroundColor(this.selected == index ? this.model.getSelectedColor() : this.model.getUnselectedColor())
             .onClick(() => {
-                this.model.setPlaceholder(option.value)
+                this.model.setPlaceholder(option.getValue())
 				this.selected = index
                 this.onSelect(option)
             })
+			.padding(this.menuModel.getPadding())
     }
 
-    // complete menu
     @Builder
 	MenuBuilder() {
         Column() {
-            ForEach(this.menu, (item, i) => {
-                this.MenuItem(item, i)
-            })
+			List() {
+				ForEach(this.menu, (item, i) => {
+					ListItem() {
+						this.MenuItem(item, i)
+					}
+				}, item => item.id)
+			}
         }
             .width(this.menuModel.getWidth())
             .padding({top: 7, bottom: 7})
@@ -87,30 +79,22 @@ export struct MaterialSelect {
     }
 }
 
-// ############################ multiple material select
-export class MultipleMenuOption {
-    value: string
-    id: any
-    isChecked?: boolean
-}
-
 @Component
-export struct MultipleSelect {
-    // stop the menu from disappearing on click
-
+struct MultipleSelect {
     @State menu: MultipleMenuOption[] = []
     private selected: MultipleMenuOption[] = []
-	onSelect: (itemList: MultipleMenuOption[]) => any
+	onSelect: (itemList: MultipleMenuOption[]) => void
 	@State model: MaterialModel.Model = new MaterialModel.Model('')
 	@State menuModel: MaterialModel.MultipleMenuModel = new MaterialModel.MultipleMenuModel()
-	private updateMenu: () => void = () => {
+
+	private updateMenu() {
 		let list = []
 		let choices = []
 		for (let i = 0; i < this.menu.length; i++) {
 			let m = this.menu[i]
 			list.push(m)
-			if(m.isChecked) {
-				choices.push({value: m.value, id: m.id})
+			if(m.getIsChecked()) {
+				choices.push(m)
 			}
 		}
 		this.menu = list
@@ -118,57 +102,55 @@ export struct MultipleSelect {
 		this.onSelect(this.selected)
 	}
 
-	// replace null values
     aboutToAppear() {
         let choices = []
         for (let i = 0; i < this.menu.length; i++) {
             let m = this.menu[i]
-			if(m.isChecked == null) {
-				m.isChecked = false
-			}
-            if(m.isChecked) {
-                choices.push({value: m.value, id: m.id})
+            if(m.getIsChecked()) {
+                choices.push(m)
             }
         }
         this.selected = choices
         this.onSelect(this.selected)
     }
 
-    // single menu item
     @Builder
 	MenuItem(option: MultipleMenuOption, index: number) {
         Row({space: 9}) {
-            Checkbox({name: option.value,  group: "check"})
-                .select(option.isChecked)
+            Checkbox({name: option.getValue(),  group: "check"})
+                .select(option.getIsChecked())
                 .selectedColor(this.menuModel.getCheckColor())
                 .height(this.menuModel.getCheckBoxHeight())
                 .width(this.menuModel.getCheckBoxWidth())
-                .margin({left: 12})
 				.onChange((val: boolean) => {
-					this.menu[index].isChecked = Boolean(val)
+					this.menu[index].setIsChecked(Boolean(val))
 					this.updateMenu()
 				})
-            Text(option.value)
+            Text(option.getValue())
                 .fontSize(this.menuModel.getFontSize())
                 .fontWeight(FontWeight.Bold)
 				.maxLines(2)
                 .textOverflow({overflow: TextOverflow.Ellipsis})
         }
             .width(this.menuModel.getWidth())
-			.backgroundColor(this.menu[index].isChecked ? this.model.getSelectedColor() : this.model.getUnselectedColor())
+			.backgroundColor(this.menu[index].getIsChecked() ? this.model.getSelectedColor() : this.model.getUnselectedColor())
             .onClick(() => {
-                this.menu[index].isChecked = !this.menu[index].isChecked
+                this.menu[index].setIsChecked(!this.menu[index].getIsChecked())
 				this.updateMenu()
             })
+			.padding(this.menuModel.getPadding())
     }
 
-    // complete menu
     @Builder
 	MenuBuilder() {
 		Column() {
-			ForEach(this.menu, (item, i) => {
-				this.MenuItem(item, i)
-			})
+			List() {
+				ForEach(this.menu, (item, i) => {
+					ListItem() {
+						this.MenuItem(item, i)
+					}
+				}, item => item.id)
+			}
 		}
 			.width(this.menuModel.getWidth())
 			.padding({top: 7, bottom: 7})
@@ -202,29 +184,21 @@ export struct MultipleSelect {
     }
 }
 
-// ############################ dot material menu
-export class DotMenuOption {
-	icon?: string | Resource
-	value: string
-	id: number | string
-}
-
 @Component
-export struct MaterialDotMenu {
+struct MaterialDotMenu {
 	menu: DotMenuOption[] = []
-	onSelect: (it: DotMenuOption) => any
+	onSelect: (it: DotMenuOption) => void
 	@State model: MaterialModel.DotModel = new MaterialModel.DotModel()
     @State menuModel: MaterialModel.DotMenuModel = new MaterialModel.DotMenuModel()
 
-    // single menu item
     @Builder
 	MenuItem(option: DotMenuOption) {
         Row({space: 12}) {
-            Image(option.icon)
+            Image(option.getIcon())
                 .objectFit(ImageFit.Contain)
                 .width(this.menuModel.getIconWidth())
                 .height(this.menuModel.getIconHeight())
-            Text(option.value)
+            Text(option.getValue())
                 .fontSize(this.menuModel.getFontSize())
 				.fontColor(this.menuModel.getFontColor())
                 .fontWeight(FontWeight.Bold)
@@ -232,17 +206,21 @@ export struct MaterialDotMenu {
             .height(this.menuModel.getHeight())
             .width(this.menuModel.getWidth())
             .onClick(() => {
-				this.onSelect({value: option.value, id: option.id})
+				this.onSelect(option)
             })
+			.padding(this.menuModel.getPadding())
     }
 
-    // complete menu
     @Builder
 	MenuBuilder() {
         Column() {
-            ForEach(this.menu, (it) => {
-				this.MenuItem(it)
-			})
+			List() {
+				ForEach(this.menu, (item) => {
+					ListItem() {
+						this.MenuItem(item)
+					}
+				}, item => item.id)
+			}
         }
             .width(this.menuModel.getWidth())
             .padding({top: 7, bottom: 7})
@@ -258,3 +236,6 @@ export struct MaterialDotMenu {
 			.margin(this.model.getMargin())
 	}
 }
+
+export { MaterialSelect, MultipleSelect, MaterialDotMenu }
+export { MaterialModel, MenuOption, MultipleMenuOption, DotMenuOption }

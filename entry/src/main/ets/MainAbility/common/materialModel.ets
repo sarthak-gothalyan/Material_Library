@@ -1,4 +1,4 @@
-export namespace MaterialModel {
+namespace MaterialModel {
 	export class Model {
 		private title: string = ''
 		private titleFontSize: number | string = 14
@@ -205,7 +205,7 @@ export namespace MaterialModel {
 		private fontColor: string | Color = '#333F48'
 		private backgroundColor: string | Color = Color.White
 		private borderRadius: number | string = 0
-		private margin: Margin | Length = 0
+		private padding: Padding  | Length = 10
 
 		setHeight(height: number | string): MenuModel {
 			if(height == null || height == undefined) {
@@ -277,6 +277,18 @@ export namespace MaterialModel {
 		}
 		getBorderRadius(): number | string {
 			return this.borderRadius
+		}
+
+		setPadding(padding: Margin | Length): MenuModel {
+			if(padding == null || padding == undefined) {
+				this.padding = 10
+				return this
+			}
+			this.padding = padding
+			return this
+		}
+		getPadding(): Padding | Length {
+			return this.padding
 		}
 	}
 
@@ -406,3 +418,5 @@ export namespace MaterialModel {
 		}
 	}
 }
+
+export { MaterialModel }
