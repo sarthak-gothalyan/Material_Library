@@ -104,6 +104,7 @@ struct MultipleSelect {
 		}
 		this.menu = list
 		this.selected = choices
+		if(this.onSelect != null && this.onSelect != undefined) this.onSelect(this.selected)
 	}
 
     aboutToAppear() {
@@ -115,7 +116,6 @@ struct MultipleSelect {
             }
         }
         this.selected = choices
-		if(this.onSelect != null && this.onSelect != undefined) this.onSelect(this.selected)
     }
 
     @Builder
