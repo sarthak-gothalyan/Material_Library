@@ -1,4 +1,3 @@
-// make functions to change properties
 export namespace MaterialModel {
 	export class Model {
 		private title: string = ''

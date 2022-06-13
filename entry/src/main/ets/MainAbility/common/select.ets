@@ -2,7 +2,7 @@
 // change bind menu not scrollable
 // fix any clipping issues
 
-// import model class
+// import model namespace
 import { MaterialModel } from './materialModel'
 
 // ############################ single material select
