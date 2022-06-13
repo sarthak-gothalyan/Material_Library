@@ -39,7 +39,7 @@ struct Index {
 	]
 
     aboutToAppear() {
-		this.selectModel.setWidth(60)
+		this.selectModel.setWidth(100)
 		this.selectModel.setPadding(null)
 		this.selectModel.setBackgroundColor(null)
 		this.selectModel.setBorderColor(null)

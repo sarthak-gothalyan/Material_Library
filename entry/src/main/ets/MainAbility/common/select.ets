@@ -7,7 +7,13 @@ struct MaterialSelect {
     onSelect: (item: MenuOption) => void
 	@State model: MaterialModel.Model = new MaterialModel.Model('')
 	@State menuModel: MaterialModel.MenuModel = new MaterialModel.MenuModel()
-	private selected: number = -1
+	@State selected: number = -1
+
+	aboutToAppear() {
+		if(this.selected == -1) return
+		this.model.setPlaceholder(this.menu[this.selected].getValue())
+		if(this.onSelect != null && this.onSelect != undefined) this.onSelect(this.menu[this.selected])
+	}
 
     @Builder
 	MenuItem(option: MenuOption, index: number) {
@@ -25,7 +31,7 @@ struct MaterialSelect {
             .onClick(() => {
                 this.model.setPlaceholder(option.getValue())
 				this.selected = index
-                this.onSelect(option)
+                if(this.onSelect != null && this.onSelect != undefined) this.onSelect(option)
             })
 			.padding(this.menuModel.getPadding())
     }
@@ -99,7 +105,7 @@ struct MultipleSelect {
 		}
 		this.menu = list
 		this.selected = choices
-		this.onSelect(this.selected)
+		if(this.onSelect != null && this.onSelect != undefined) this.onSelect(this.selected)
 	}
 
     aboutToAppear() {
@@ -111,7 +117,7 @@ struct MultipleSelect {
             }
         }
         this.selected = choices
-        this.onSelect(this.selected)
+		if(this.onSelect != null && this.onSelect != undefined) this.onSelect(this.selected)
     }
 
     @Builder
@@ -206,7 +212,7 @@ struct MaterialDotMenu {
             .height(this.menuModel.getHeight())
             .width(this.menuModel.getWidth())
             .onClick(() => {
-				this.onSelect(option)
+				if(this.onSelect != null && this.onSelect != undefined) this.onSelect(option)
             })
 			.padding(this.menuModel.getPadding())
     }
