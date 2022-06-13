@@ -39,7 +39,7 @@ struct Index {
 	]
 
     aboutToAppear() {
-		this.selectModel.setWidth(100)
+		this.selectModel.setWidth("50%")
 		this.selectModel.setPadding(null)
 		this.selectModel.setBackgroundColor(null)
 		this.selectModel.setBorderColor(null)
@@ -52,7 +52,7 @@ struct Index {
 		this.selectMenuModel.setPadding(null)
 		this.selectModel.setMargin(null)
 
-		this.multipleSelectModel.setWidth(null)
+		this.multipleSelectModel.setWidth("50%")
 		this.multipleSelectModel.setPadding(null)
 		this.multipleSelectModel.setHeight(null)
 		this.multipleSelectModel.setPlaceholder(null)
@@ -106,7 +106,8 @@ struct Index {
                     onSelect: (it: MenuOption) => {
                         console.log(it.getValue())
                     },
-					model: this.selectModel
+					model: this.selectModel,
+					selected: 5
                 })
                 MultipleSelect({
                     menu: this.multipleSelectMenu,

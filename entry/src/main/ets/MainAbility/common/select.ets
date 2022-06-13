@@ -12,7 +12,6 @@ struct MaterialSelect {
 	aboutToAppear() {
 		if(this.selected == -1) return
 		this.model.setPlaceholder(this.menu[this.selected].getValue())
-		if(this.onSelect != null && this.onSelect != undefined) this.onSelect(this.menu[this.selected])
 	}
 
     @Builder
@@ -105,7 +104,6 @@ struct MultipleSelect {
 		}
 		this.menu = list
 		this.selected = choices
-		if(this.onSelect != null && this.onSelect != undefined) this.onSelect(this.selected)
 	}
 
     aboutToAppear() {
