@@ -1,3 +1,6 @@
+// clean index file
+// format code
+
 import {
     MaterialSelect,
     MenuOption,
@@ -27,10 +30,12 @@ struct Index {
 	dotModel: MaterialModel.DotModel = new MaterialModel.DotModel()
 	dotMenuModel: MaterialModel.DotMenuModel = new MaterialModel.DotMenuModel()
 	dotMenu: DotMenuOption[] = [
-//		new DotMenuOption(null, null),
-//		new DotMenuOption(null, null, null),
+		new DotMenuOption(null, null),
+		new DotMenuOption(null, null, null),
 		new DotMenuOption('Get Link', 1),
-		new DotMenuOption('Download', 2, $r('app.media.download'))
+		new DotMenuOption('Download', 2, $r('app.media.download')),
+		new DotMenuOption('Download', 2, $r('app.media.download')),
+		new DotMenuOption('Download', 2, $r('app.media.download')),new DotMenuOption('Download', 2, $r('app.media.download')),new DotMenuOption('Download', 2, $r('app.media.download')),new DotMenuOption('Download', 2, $r('app.media.download')),new DotMenuOption('Download', 2, $r('app.media.download')),new DotMenuOption('Download', 2, $r('app.media.download')),new DotMenuOption('Download', 2, $r('app.media.download')),new DotMenuOption('Download', 2, $r('app.media.download')),new DotMenuOption('Download', 2, $r('app.media.download')),new DotMenuOption('Download', 2, $r('app.media.download')),new DotMenuOption('Download', 2, $r('app.media.download')),new DotMenuOption('Download', 2, $r('app.media.download')),new DotMenuOption('Download', 2, $r('app.media.download')),new DotMenuOption('Download', 2, $r('app.media.download')),new DotMenuOption('Download', 2, $r('app.media.download')),new DotMenuOption('Download', 2, $r('app.media.download')),new DotMenuOption('Download', 2, $r('app.media.download')),new DotMenuOption('Download', 2, $r('app.media.download')),new DotMenuOption('Download', 2, $r('app.media.download')),new DotMenuOption('Download', 2, $r('app.media.download')),new DotMenuOption('Download', 2, $r('app.media.download')),new DotMenuOption('Download', 2, $r('app.media.download')),new DotMenuOption('Download', 2, $r('app.media.download')),new DotMenuOption('Download', 2, $r('app.media.download')),new DotMenuOption('Download', 2, $r('app.media.download')),new DotMenuOption('Download', 2, $r('app.media.download')),new DotMenuOption('Download', 2, $r('app.media.download')),new DotMenuOption('Download', 2, $r('app.media.download')),
 	]
 
     aboutToAppear() {
@@ -66,14 +71,23 @@ struct Index {
 		this.dotMenuModel.setPadding(0)
 		this.dotModel.setMargin(null)
 
+		this.dotMenu[0].setValue(null)
+		this.dotMenu[1].setId(null)
+		this.dotMenu[2].setIcon(null)
+
         for(let i = 0; i <= 100; i++) {
             this.selectMenu.push(new MenuOption('Option ' + i, i))
         }
+		this.selectMenu[0].setValue(null)
+		this.selectMenu[1].setId(null)
 		this.selectMenu.push(new MenuOption(null, null))
         let options = [true, false, true, false, true, true, true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,]
         options.forEach((c, i) => {
             this.multipleSelectMenu.push(new MultipleMenuOption('Option ' + i, i, null))
         })
+		this.multipleSelectMenu[0].setValue(null)
+		this.multipleSelectMenu[1].setId(null)
+		this.multipleSelectMenu[2].setIsChecked(null)
 		this.multipleSelectMenu.push(new MultipleMenuOption(null, null))
 		this.multipleSelectMenu.push(new MultipleMenuOption(null, null, null))
     }
