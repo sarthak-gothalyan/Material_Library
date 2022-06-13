@@ -300,9 +300,6 @@ export namespace MaterialModel {
 		private height: number | string = 24
 		private width: number | string = 24
 		private backgroundColor: string | Color = Color.White
-		private borderWidth: number | string = 1
-		private borderRadius: number | string = 4
-		private borderColor: string | Color = '#9CA2C7'
 
 		setHeight(height: number | string): DotModel {
 			if(height == null || height == undefined) {
@@ -338,42 +335,6 @@ export namespace MaterialModel {
 		}
 		getBackgroundColor(): string | Color {
 			return this.backgroundColor
-		}
-
-		setBorderWidth(borderWidth: number | string): DotModel {
-			if(borderWidth == null || borderWidth == undefined) {
-				this.borderWidth = 1
-				return this
-			}
-			this.borderWidth = borderWidth
-			return this
-		}
-		getBorderWidth(): number | string {
-			return this.borderWidth
-		}
-
-		setBorderRadius(borderRadius: number | string): DotModel {
-			if(borderRadius == null || borderRadius == undefined) {
-				this.borderRadius = 4
-				return this
-			}
-			this.borderRadius = borderRadius
-			return this
-		}
-		getBorderRadius(): number | string {
-			return this.borderRadius
-		}
-
-		setBorderColor(borderColor: string | Color): DotModel {
-			if(borderColor == null || borderColor == undefined) {
-				this.borderColor = '#9CA2C7'
-				return this
-			}
-			this.borderColor = borderColor
-			return this
-		}
-		getBorderColor(): string | Color {
-			return this.borderColor
 		}
 	}
 

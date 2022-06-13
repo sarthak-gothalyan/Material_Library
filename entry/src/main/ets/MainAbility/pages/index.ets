@@ -58,6 +58,7 @@ struct Index {
 	]
 
     aboutToAppear() {
+		this.selectModel.setWidth(60)
 		this.selectModel.setBackgroundColor(null)
 		this.selectModel.setBorderColor(null)
 		this.selectModel.setBorderRadius(null)
@@ -76,9 +77,6 @@ struct Index {
 		this.multipleMenuModel.setBackgroundColor(null)
 		this.multipleMenuModel.setCheckBoxHeight(null)
 
-		this.dotModel.setBorderWidth(null)
-		this.dotModel.setBorderRadius(null)
-		this.dotModel.setBackgroundColor(null)
 		this.dotMenuModel.setBackgroundColor(null)
 		this.dotMenuModel.setFontSize(null)
 		this.dotMenuModel.setIconHeight(null)

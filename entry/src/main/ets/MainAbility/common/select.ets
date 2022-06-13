@@ -188,14 +188,14 @@ export struct MultipleSelect {
     // complete menu
     @Builder
 	MenuBuilder() {
-    Column() {
-        ForEach(this.menu, (item, i) => {
-            this.MenuItem(item, i)
-        })
-    }
-        .width(this.menuModel.getWidth())
-        .padding({top: 7, bottom: 7})
-        .borderRadius(this.menuModel.getBorderRadius())
+		Column() {
+			ForEach(this.menu, (item, i) => {
+				this.MenuItem(item, i)
+			})
+		}
+			.width(this.menuModel.getWidth())
+			.padding({top: 7, bottom: 7})
+			.borderRadius(this.menuModel.getBorderRadius())
     }
 
     build() {
@@ -292,9 +292,6 @@ export struct MaterialDotMenu {
 		Image($r('app.media.dot_menu'))
 			.height(this.model.getHeight())
 			.width(this.model.getWidth())
-			.borderColor(this.model.getBorderColor())
-			.borderRadius(this.model.getBorderRadius())
-			.borderWidth(this.model.getBorderWidth())
 			.objectFit(ImageFit.Contain)
 			.bindMenu(this.MenuBuilder())
 	}
