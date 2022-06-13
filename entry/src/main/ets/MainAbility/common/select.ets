@@ -1,5 +1,5 @@
 // change bind menu border radius
-// change bind menu not scrollable
+// make bind menu not scrollable
 // fix any clipping issues
 
 // import model namespace
@@ -60,24 +60,22 @@ export struct MaterialSelect {
                 .fontSize(this.model.getTitleFontSize())
                 .fontColor(this.model.getFontColor())
                 .fontWeight(FontWeight.Medium)
-            Row() {
+            Flex({direction: FlexDirection.Row, justifyContent: FlexAlign.SpaceBetween, alignItems: ItemAlign.Center}) {
                 Text(this.model.getPlaceholder())
                     .fontSize(this.model.getFontSize())
                     .fontWeight(FontWeight.Bold)
                     .fontColor(this.model.getFontColor())
 					.maxLines(1)
                     .textOverflow({ overflow: TextOverflow.Ellipsis })
-                    .margin({ left: 16, top: 18, bottom: 18 })
                 Image($r('app.media.dropdown'))
                     .height(8)
                     .width(16)
                     .objectFit(ImageFit.Contain)
                     .opacity(0.5)
-                    .margin({ right: 10, top: 26, bottom: 26 })
             }
                 .width(this.model.getWidth())
                 .height(this.model.getHeight())
-                .justifyContent(FlexAlign.SpaceBetween)
+				.padding(this.model.getPadding())
                 .borderWidth(this.model.getBorderWidth())
                 .borderColor(this.model.getBorderColor())
                 .borderRadius(this.model.getBorderRadius())
@@ -183,22 +181,21 @@ export struct MultipleSelect {
                 .fontSize(this.model.getTitleFontSize())
                 .fontColor(this.model.getFontColor())
                 .fontWeight(FontWeight.Medium)
-            Row() {
+            Flex({justifyContent: FlexAlign.End, alignItems: ItemAlign.Center}) {
                 Image($r('app.media.dropdown'))
                     .height(8)
                     .width(16)
                     .objectFit(ImageFit.Contain)
                     .opacity(0.5)
-                    .margin({ right: 10, top: 26, bottom: 26 })
             }
                 .height(this.model.getHeight())
 				.width(this.model.getWidth())
-                .justifyContent(FlexAlign.End)
                 .borderWidth(this.model.getBorderWidth())
                 .borderColor(this.model.getBorderColor())
                 .borderRadius(this.model.getBorderRadius())
                 .backgroundColor(this.model.getBackgroundColor())
                 .bindMenu(this.MenuBuilder())
+				.padding(this.model.getPadding())
         }
             .alignItems(HorizontalAlign.Start)
 			.margin(this.model.getMargin())

@@ -59,6 +59,7 @@ struct Index {
 
     aboutToAppear() {
 		this.selectModel.setWidth(60)
+		this.selectModel.setPadding(null)
 		this.selectModel.setBackgroundColor(null)
 		this.selectModel.setBorderColor(null)
 		this.selectModel.setBorderRadius(null)
@@ -69,6 +70,9 @@ struct Index {
 		this.selectMenuModel.setFontSize(null)
 		this.selectModel.setMargin(null)
 
+		this.multipleSelectModel.setWidth(null)
+		this.multipleSelectModel.setPadding(null)
+		this.multipleSelectModel.setHeight(null)
 		this.multipleSelectModel.setPlaceholder(null)
 		this.multipleSelectModel.setBackgroundColor(null)
 		this.multipleSelectModel.setBorderColor(null)
@@ -82,7 +86,7 @@ struct Index {
 		this.dotMenuModel.setBackgroundColor(null)
 		this.dotMenuModel.setFontSize(null)
 		this.dotMenuModel.setIconHeight(null)
-		this.dotMenuModel.setMargin(null)
+		this.dotModel.setMargin(null)
 
         for(let i = 0; i <= 10; i++) {
             this.selectMenu.push({

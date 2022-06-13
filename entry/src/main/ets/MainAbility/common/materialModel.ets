@@ -13,6 +13,7 @@ export namespace MaterialModel {
 		private borderColor: string | Color = '#9CA2C7'
 		private unselectedColor: string | Color = Color.White
 		private selectedColor: string | Color = '#F0F3FF'
+		private padding: Padding | Length = 10
 		private margin: Margin | Length = 0
 
 		constructor(title: string, placeholder?: string) {
@@ -170,6 +171,18 @@ export namespace MaterialModel {
 		}
 		getSelectedColor(): string | Color {
 			return this.selectedColor
+		}
+
+		setPadding(padding: Margin | Length): Model {
+			if(padding == null || padding == undefined) {
+				this.padding = 10
+				return this
+			}
+			this.padding = padding
+			return this
+		}
+		getPadding(): Padding | Length {
+			return this.padding
 		}
 
 		setMargin(margin: Margin | Length): Model {
