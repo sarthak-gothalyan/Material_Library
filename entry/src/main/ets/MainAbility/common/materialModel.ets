@@ -14,6 +14,7 @@ export namespace MaterialModel {
 		private borderColor: string | Color = '#9CA2C7'
 		private unselectedColor: string | Color = Color.White
 		private selectedColor: string | Color = '#F0F3FF'
+		private margin: Margin | Length = 0
 
 		constructor(title: string, placeholder?: string) {
 			if(title != null || title != undefined) {
@@ -171,6 +172,18 @@ export namespace MaterialModel {
 		getSelectedColor(): string | Color {
 			return this.selectedColor
 		}
+
+		setMargin(margin: Margin | Length): Model {
+			if(margin == null || margin == undefined) {
+				this.margin = 0
+				return this
+			}
+			this.margin = margin
+			return this
+		}
+		getMargin(): Margin | Length {
+			return this.margin
+		}
 	}
 
 	export class MenuModel {
@@ -180,6 +193,7 @@ export namespace MaterialModel {
 		private fontColor: string | Color = '#333F48'
 		private backgroundColor: string | Color = Color.White
 		private borderRadius: number | string = 0
+		private margin: Margin | Length = 0
 
 		setHeight(height: number | string): MenuModel {
 			if(height == null || height == undefined) {
@@ -300,6 +314,7 @@ export namespace MaterialModel {
 		private height: number | string = 24
 		private width: number | string = 24
 		private backgroundColor: string | Color = Color.White
+		private margin: Margin | Length = 0
 
 		setHeight(height: number | string): DotModel {
 			if(height == null || height == undefined) {
@@ -335,6 +350,18 @@ export namespace MaterialModel {
 		}
 		getBackgroundColor(): string | Color {
 			return this.backgroundColor
+		}
+
+		setMargin(margin: Margin | Length): DotModel {
+			if(margin == null || margin == undefined) {
+				this.margin = 0
+				return this
+			}
+			this.margin = margin
+			return this
+		}
+		getMargin(): Margin | Length {
+			return this.margin
 		}
 	}
 

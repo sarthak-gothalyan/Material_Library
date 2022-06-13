@@ -67,6 +67,7 @@ struct Index {
 		this.selectMenuModel.setBorderRadius(null)
 		this.selectMenuModel.setBackgroundColor(null)
 		this.selectMenuModel.setFontSize(null)
+		this.selectModel.setMargin(null)
 
 		this.multipleSelectModel.setPlaceholder(null)
 		this.multipleSelectModel.setBackgroundColor(null)
@@ -76,10 +77,12 @@ struct Index {
 		this.multipleMenuModel.setFontSize(null)
 		this.multipleMenuModel.setBackgroundColor(null)
 		this.multipleMenuModel.setCheckBoxHeight(null)
+		this.multipleSelectModel.setMargin(null)
 
 		this.dotMenuModel.setBackgroundColor(null)
 		this.dotMenuModel.setFontSize(null)
 		this.dotMenuModel.setIconHeight(null)
+		this.dotMenuModel.setMargin(null)
 
         for(let i = 0; i <= 10; i++) {
             this.selectMenu.push({
@@ -132,7 +135,7 @@ struct Index {
 					MaterialDotMenu({
 						menu: this.dotMenu,
 						onSelect: (it: DotMenuOption) => {
-							console.log(it.id + ' ' + it.value)
+							//console.log(it.id + ' ' + it.value)
 						},
 						model: this.dotModel,
 						menuModel: this.dotMenuModel

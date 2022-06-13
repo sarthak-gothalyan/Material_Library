@@ -20,23 +20,6 @@ export struct MaterialSelect {
 	@State menuModel: MaterialModel.MenuModel = new MaterialModel.MenuModel()
 	private selected: number = -1
 
-	// replace null values
-	aboutToAppear() {
-		console.log(this.model + ' ')
-		if(this.model == null || this.model == undefined) {
-			this.model = new MaterialModel.Model('')
-		}
-		if(this.menuModel == null || this.menuModel == undefined) {
-			this.menuModel = new MaterialModel.MenuModel()
-		}
-		if(this.onSelect == null || this.onSelect == undefined) {
-			this.onSelect = () => {}
-		}
-		if(this.menu == null || this.menu == undefined) {
-			this.menu = []
-		}
-	}
-
     // single menu item
     @Builder
 	MenuItem(option: MenuOption, index: number) {
@@ -102,6 +85,7 @@ export struct MaterialSelect {
                 .bindMenu(this.MenuBuilder())
         }
             .alignItems(HorizontalAlign.Start)
+			.margin(this.model.getMargin())
     }
 }
 
@@ -121,21 +105,23 @@ export struct MultipleSelect {
 	onSelect: (itemList: MultipleMenuOption[]) => any
 	@State model: MaterialModel.Model = new MaterialModel.Model('')
 	@State menuModel: MaterialModel.MultipleMenuModel = new MaterialModel.MultipleMenuModel()
+	private updateMenu: () => void = () => {
+		let list = []
+		let choices = []
+		for (let i = 0; i < this.menu.length; i++) {
+			let m = this.menu[i]
+			list.push(m)
+			if(m.isChecked) {
+				choices.push({value: m.value, id: m.id})
+			}
+		}
+		this.menu = list
+		this.selected = choices
+		this.onSelect(this.selected)
+	}
 
 	// replace null values
     aboutToAppear() {
-		if(this.model == null || this.model == undefined) {
-			this.model = new MaterialModel.Model('')
-		}
-		if(this.menuModel == null || this.menuModel == undefined) {
-			this.menuModel = new MaterialModel.MultipleMenuModel()
-		}
-		if(this.onSelect == null || this.onSelect == undefined) {
-			this.onSelect = () => {}
-		}
-		if(this.menu == null || this.menu == undefined) {
-			this.menu = []
-		}
         let choices = []
         for (let i = 0; i < this.menu.length; i++) {
             let m = this.menu[i]
@@ -160,6 +146,10 @@ export struct MultipleSelect {
                 .height(this.menuModel.getCheckBoxHeight())
                 .width(this.menuModel.getCheckBoxWidth())
                 .margin({left: 12})
+				.onChange((val: boolean) => {
+					this.menu[index].isChecked = Boolean(val)
+					this.updateMenu()
+				})
             Text(option.value)
                 .fontSize(this.menuModel.getFontSize())
                 .fontWeight(FontWeight.Bold)
@@ -170,18 +160,7 @@ export struct MultipleSelect {
 			.backgroundColor(this.menu[index].isChecked ? this.model.getSelectedColor() : this.model.getUnselectedColor())
             .onClick(() => {
                 this.menu[index].isChecked = !this.menu[index].isChecked
-                let list = []
-                let choices = []
-                for (let i = 0; i < this.menu.length; i++) {
-                    let m = this.menu[i]
-                    list.push(m)
-                    if(m.isChecked) {
-                        choices.push({value: m.value, id: m.id})
-                    }
-                }
-                this.menu = list
-                this.selected = choices
-                this.onSelect(this.selected)
+				this.updateMenu()
             })
     }
 
@@ -222,6 +201,7 @@ export struct MultipleSelect {
                 .bindMenu(this.MenuBuilder())
         }
             .alignItems(HorizontalAlign.Start)
+			.margin(this.model.getMargin())
     }
 }
 
@@ -238,22 +218,6 @@ export struct MaterialDotMenu {
 	onSelect: (it: DotMenuOption) => any
 	@State model: MaterialModel.DotModel = new MaterialModel.DotModel()
     @State menuModel: MaterialModel.DotMenuModel = new MaterialModel.DotMenuModel()
-
-	// replace null values
-	aboutToAppear() {
-		if(this.model == null || this.model == undefined) {
-			this.model = new MaterialModel.DotModel()
-		}
-		if(this.menuModel == null || this.menuModel == undefined) {
-			this.menuModel = new MaterialModel.DotMenuModel()
-		}
-		if(this.onSelect == null || this.onSelect == undefined) {
-			this.onSelect = () => {}
-		}
-		if(this.menu == null || this.menu == undefined) {
-			this.menu = []
-		}
-	}
 
     // single menu item
     @Builder
@@ -294,5 +258,6 @@ export struct MaterialDotMenu {
 			.width(this.model.getWidth())
 			.objectFit(ImageFit.Contain)
 			.bindMenu(this.MenuBuilder())
+			.margin(this.model.getMargin())
 	}
 }
