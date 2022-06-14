@@ -10,6 +10,7 @@ struct MaterialSelect {
 	@State selected: number = -1
 
 	aboutToAppear() {
+		console.log(this.menuModel.getWidth() + "")
 		if (this.selected == -1) return
 		this.model.setPlaceholder(this.menu[this.selected].getValue())
 	}
@@ -57,6 +58,8 @@ struct MaterialSelect {
 				.fontSize(this.model.getTitleFontSize())
 				.fontColor(this.model.getTitleFontColor())
 				.fontWeight(FontWeight.Medium)
+				.maxLines(2)
+				.textOverflow({ overflow: TextOverflow.Ellipsis })
 			Flex({
 				direction: FlexDirection.Row,
 				justifyContent: FlexAlign.SpaceBetween,
@@ -72,7 +75,6 @@ struct MaterialSelect {
 					.height(8)
 					.width(16)
 					.objectFit(ImageFit.Contain)
-					.opacity(0.5)
 			}
 			.width(this.model.getWidth())
 			.height(this.model.getHeight())
@@ -140,6 +142,7 @@ struct MultipleSelect {
 				.maxLines(2)
 				.textOverflow({ overflow: TextOverflow.Ellipsis })
 		}
+		.height(this.menuModel.getHeight())
 		.width(this.menuModel.getWidth())
 		.backgroundColor(this.menu[index].getChecked() ? this.model.getSelectedColor() : this.model.getUnselectedColor())
 		.onClick(() => {

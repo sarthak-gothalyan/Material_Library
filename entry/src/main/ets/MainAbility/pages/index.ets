@@ -20,7 +20,6 @@ struct Index {
 
 	multipleSelectName: string = 'Use Case'
 	multipleSelectMenu: MultipleMenuOption[] = []
-	multiple_selection: MultipleMenuOption[] = []
 	multipleSelectModel: MaterialModel.MultipleSelectModel = new MaterialModel.MultipleSelectModel('Use Case')
 	multipleMenuModel: MaterialModel.MultipleMenuModel = new MaterialModel.MultipleMenuModel()
 
@@ -40,7 +39,6 @@ struct Index {
 	]
 
 	aboutToAppear() {
-		// single select null check
 		this.selectModel.setTitle(null)
 		this.selectModel.setTitleFontSize(null)
 		this.selectModel.setTitleFontColor(null)
@@ -59,7 +57,6 @@ struct Index {
 		this.selectModel.setFontSize(null)
 		this.selectModel.setFontColor(null)
 
-		// multiple select null check
 		this.multipleSelectModel.setTitle(null)
 		this.multipleSelectModel.setTitleFontSize(null)
 		this.multipleSelectModel.setTitleFontColor(null)
@@ -73,13 +70,11 @@ struct Index {
 		this.multipleSelectModel.setPadding(null)
 		this.multipleSelectModel.setMargin(null)
 
-		// dot null check
 		this.dotModel.setHeight(null)
 		this.dotModel.setWidth(null)
 		this.dotModel.setBackgroundColor(null)
 		this.dotModel.setMargin(null)
 
-		// menu null check
 		this.selectMenuModel.setHeight(null)
 		this.selectMenuModel.setWidth(null)
 		this.selectMenuModel.setFontSize(null)
@@ -88,7 +83,6 @@ struct Index {
 		this.selectMenuModel.setBorderRadius(null)
 		this.selectMenuModel.setPadding(null)
 
-		// multiple menu null check
 		this.multipleMenuModel.setHeight(null)
 		this.multipleMenuModel.setWidth(null)
 		this.multipleMenuModel.setFontSize(null)
@@ -101,7 +95,6 @@ struct Index {
 		this.multipleMenuModel.setCheckBoxHeight(null)
 		this.multipleMenuModel.setCheckBoxWidth(null)
 
-		// dot menu null check
 		this.dotMenuModel.setHeight(null)
 		this.dotMenuModel.setWidth(null)
 		this.dotMenuModel.setFontSize(null)
@@ -113,7 +106,6 @@ struct Index {
 		this.dotMenuModel.setIconHeight(null)
 		this.dotMenuModel.setIconWidth(null)
 
-		// prop check
 		this.dotMenu[0].setValue(null)
 		this.dotMenu[1].setId(null)
 		this.dotMenu[2].setIcon(null)
@@ -121,10 +113,10 @@ struct Index {
 		for (let i = 0; i <= 5; i++) {
 			this.selectMenu.push(new MenuOption('Option ' + i, i))
 		}
-		// prop check
+
 		this.selectMenu[0].setValue(null)
 		this.selectMenu[1].setId(null)
-		// constructor check
+
 		this.selectMenu.push(new MenuOption(null, null))
 		this.selectMenu.push(new MenuOption("a", null))
 		this.selectMenu.push(new MenuOption(null, 50))
@@ -133,11 +125,11 @@ struct Index {
 		options.forEach((c, i) => {
 			this.multipleSelectMenu.push(new MultipleMenuOption('Option ' + i, i, c))
 		})
-		// set prop check
+
 		this.multipleSelectMenu[0].setValue(null)
 		this.multipleSelectMenu[1].setId(null)
 		this.multipleSelectMenu[2].setChecked(null)
-		// null constructor check
+
 		this.multipleSelectMenu.push(new MultipleMenuOption(null, null))
 		this.multipleSelectMenu.push(new MultipleMenuOption(null, null, null))
 		this.multipleSelectMenu.push(new MultipleMenuOption("a", null))
@@ -158,22 +150,30 @@ struct Index {
 
 			Row({ space: 10 }) {
 				MaterialSelect({
-					menu: this.selectMenu,
+					menu: [
+						new MenuOption("Option 1", 1),
+						new MenuOption("Option 2", 2),
+						new MenuOption("Option 3", 3),
+					],
 					onSelect: (it: MenuOption) => {
 						console.log(it.getValue())
 					},
-					model: this.selectModel,
-					selected: 5
+					model: new MaterialModel.SingleSelectModel("Single Select"),
+					menuModel: new MaterialModel.MenuModel(),
 				})
 				MultipleSelect({
-					menu: this.multipleSelectMenu,
+					menu: [
+						new MultipleMenuOption("Option 1", 1),
+						new MultipleMenuOption("Option 2", 2, true),
+						new MultipleMenuOption("Option 3", 3),
+					],
 					onSelect: (itL: MultipleMenuOption[]) => {
 						itL.forEach((it) => {
 							console.log(it.getValue())
 						})
 					},
-					model: this.multipleSelectModel,
-					menuModel: this.multipleMenuModel
+					model: new MaterialModel.MultipleSelectModel("Multiple Select"),
+					menuModel: new MaterialModel.MultipleMenuModel()
 				})
 			}
 
@@ -183,12 +183,16 @@ struct Index {
 						.fontSize(18)
 						.fontWeight(FontWeight.Bold)
 					MaterialDotMenu({
-						menu: this.dotMenu,
+						menu: [
+							new DotMenuOption("Preview", 1, $r('app.media.preview')),
+							new DotMenuOption("Download", 2, $r('app.media.download')),
+							new DotMenuOption("Remove", 3, $r('app.media.remove'))
+						],
 						onSelect: (it: DotMenuOption) => {
 							console.log(it.getId() + ' ' + it.getValue())
 						},
-						model: this.dotModel,
-						menuModel: this.dotMenuModel
+						model: new MaterialModel.DotModel(),
+						menuModel: new MaterialModel.DotMenuModel()
 					})
 				}
 
