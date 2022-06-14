@@ -1,12 +1,10 @@
 namespace MaterialModel {
 	export class Model {
-		private title: string = ''
+		private title: string = ""
 		private titleFontSize: number | string = 14
-		private placeholder: string = 'Select'
+		private titleFontColor: string | Resource = '#333F48'
 		private height: number | string = 60
 		private width: number | string = 100
-		private fontSize: number | string = 18
-		private fontColor: string | Color = '#333F48'
 		private backgroundColor: string | Color = Color.White
 		private borderWidth: number | string = 1
 		private borderRadius: number | string = 4
@@ -16,30 +14,23 @@ namespace MaterialModel {
 		private padding: Padding | Length = 10
 		private margin: Margin | Length = 0
 
-		constructor(title: string, placeholder?: string) {
-			if (title != null || title != undefined) {
+		constructor(title: string) {
+			if (title != null && title != undefined) {
 				this.title = title
 			}
-			if (placeholder != null || placeholder != undefined) {
-				this.placeholder = placeholder
+		}
+
+		setTitle(title: string): Model {
+			if (title == null || title == undefined) {
+				this.title = ''
+				return this
 			}
+			this.title = title
+			return this
 		}
 
 		getTitle(): string {
 			return this.title
-		}
-
-		setPlaceholder(placeholder: string): Model {
-			if (placeholder == null || placeholder == undefined) {
-				this.placeholder = ''
-				return this
-			}
-			this.placeholder = placeholder
-			return this
-		}
-
-		getPlaceholder(): string {
-			return this.placeholder
 		}
 
 		setTitleFontSize(titleFontSize: number | string): Model {
@@ -53,6 +44,19 @@ namespace MaterialModel {
 
 		getTitleFontSize(): number | string {
 			return this.titleFontSize
+		}
+
+		setTitleFontColor(titleFontColor: string | Resource): Model {
+			if (titleFontColor == null || titleFontColor == undefined) {
+				this.titleFontColor = '#333F48'
+				return this
+			}
+			this.titleFontColor = titleFontColor
+			return this
+		}
+
+		getTitleFontColor(): string | Resource {
+			return this.titleFontColor
 		}
 
 		setHeight(height: number | string): Model {
@@ -79,32 +83,6 @@ namespace MaterialModel {
 
 		getWidth(): number | string {
 			return this.width
-		}
-
-		setFontSize(fontSize: number | string): Model {
-			if (fontSize == null || fontSize == undefined) {
-				this.fontSize = 18
-				return this
-			}
-			this.fontSize = fontSize
-			return this
-		}
-
-		getFontSize(): number | string {
-			return this.fontSize
-		}
-
-		setFontColor(fontColor: string | Color): Model {
-			if (fontColor == null || fontColor == undefined) {
-				this.fontColor = '#333F48'
-				return this
-			}
-			this.fontColor = fontColor
-			return this
-		}
-
-		getFontColor(): string | Color {
-			return this.fontColor
 		}
 
 		setBackgroundColor(backgroundColor: string | Color): Model {
@@ -209,6 +187,64 @@ namespace MaterialModel {
 
 		getMargin(): Margin | Length {
 			return this.margin
+		}
+	}
+
+	export class SingleSelectModel extends Model {
+		private placeholder: string = "Select"
+		private fontSize: number | string = 18
+		private fontColor: string | Color = '#333F48'
+
+		constructor(title: string, placeholder?: string) {
+			super(title)
+			if (placeholder != null && placeholder != undefined) {
+				this.placeholder = placeholder
+			}
+		}
+
+		setPlaceholder(placeholder: string): SingleSelectModel {
+			if (placeholder == null || placeholder == undefined) {
+				this.placeholder = ''
+				return this
+			}
+			this.placeholder = placeholder
+			return this
+		}
+
+		getPlaceholder(): string {
+			return this.placeholder
+		}
+
+		setFontSize(fontSize: number | string): Model {
+			if (fontSize == null || fontSize == undefined) {
+				this.fontSize = 18
+				return this
+			}
+			this.fontSize = fontSize
+			return this
+		}
+
+		getFontSize(): number | string {
+			return this.fontSize
+		}
+
+		setFontColor(fontColor: string | Color): Model {
+			if (fontColor == null || fontColor == undefined) {
+				this.fontColor = '#333F48'
+				return this
+			}
+			this.fontColor = fontColor
+			return this
+		}
+
+		getFontColor(): string | Color {
+			return this.fontColor
+		}
+	}
+
+	export class MultipleSelectModel extends Model {
+		constructor(title: string) {
+			super(title)
 		}
 	}
 

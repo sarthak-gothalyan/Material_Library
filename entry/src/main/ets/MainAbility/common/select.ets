@@ -5,7 +5,7 @@ import { MenuOption, MultipleMenuOption, DotMenuOption } from './menuOptions'
 struct MaterialSelect {
 	menu: MenuOption[]
 	onSelect: (item: MenuOption) => void
-	@State model: MaterialModel.Model = new MaterialModel.Model('')
+	@State model: MaterialModel.SingleSelectModel = new MaterialModel.SingleSelectModel('')
 	@State menuModel: MaterialModel.MenuModel = new MaterialModel.MenuModel()
 	@State selected: number = -1
 
@@ -55,7 +55,7 @@ struct MaterialSelect {
 		Column({ space: 10 }) {
 			Text(this.model.getTitle())
 				.fontSize(this.model.getTitleFontSize())
-				.fontColor(this.model.getFontColor())
+				.fontColor(this.model.getTitleFontColor())
 				.fontWeight(FontWeight.Medium)
 			Flex({
 				direction: FlexDirection.Row,
@@ -93,7 +93,7 @@ struct MultipleSelect {
 	@State menu: MultipleMenuOption[] = []
 	private selected: MultipleMenuOption[] = []
 	onSelect: (itemList: MultipleMenuOption[]) => void
-	@State model: MaterialModel.Model = new MaterialModel.Model('')
+	@State model: MaterialModel.MultipleSelectModel = new MaterialModel.MultipleSelectModel('')
 	@State menuModel: MaterialModel.MultipleMenuModel = new MaterialModel.MultipleMenuModel()
 
 	private updateMenu() {
@@ -102,7 +102,7 @@ struct MultipleSelect {
 		for (let i = 0; i < this.menu.length; i++) {
 			let m = this.menu[i]
 			list.push(m)
-			if (m.getIsChecked()) {
+			if (m.getChecked()) {
 				choices.push(m)
 			}
 		}
@@ -115,7 +115,7 @@ struct MultipleSelect {
 		let choices = []
 		for (let i = 0; i < this.menu.length; i++) {
 			let m = this.menu[i]
-			if (m.getIsChecked()) {
+			if (m.getChecked()) {
 				choices.push(m)
 			}
 		}
@@ -126,12 +126,12 @@ struct MultipleSelect {
 	MenuItem(option: MultipleMenuOption, index: number) {
 		Row({ space: 9 }) {
 			Checkbox({ name: option.getValue(), group: "check" })
-				.select(option.getIsChecked())
+				.select(option.getChecked())
 				.selectedColor(this.menuModel.getCheckColor())
 				.height(this.menuModel.getCheckBoxHeight())
 				.width(this.menuModel.getCheckBoxWidth())
 				.onChange((val: boolean) => {
-					this.menu[index].setIsChecked(Boolean(val))
+					this.menu[index].setChecked(Boolean(val))
 					this.updateMenu()
 				})
 			Text(option.getValue())
@@ -141,9 +141,9 @@ struct MultipleSelect {
 				.textOverflow({ overflow: TextOverflow.Ellipsis })
 		}
 		.width(this.menuModel.getWidth())
-		.backgroundColor(this.menu[index].getIsChecked() ? this.model.getSelectedColor() : this.model.getUnselectedColor())
+		.backgroundColor(this.menu[index].getChecked() ? this.model.getSelectedColor() : this.model.getUnselectedColor())
 		.onClick(() => {
-			this.menu[index].setIsChecked(!this.menu[index].getIsChecked())
+			this.menu[index].setChecked(!this.menu[index].getChecked())
 			this.updateMenu()
 		})
 		.padding(this.menuModel.getPadding())
@@ -169,7 +169,7 @@ struct MultipleSelect {
 		Column({ space: 10 }) {
 			Text(this.model.getTitle())
 				.fontSize(this.model.getTitleFontSize())
-				.fontColor(this.model.getFontColor())
+				.fontColor(this.model.getTitleFontColor())
 				.fontWeight(FontWeight.Medium)
 			Flex({ justifyContent: FlexAlign.End, alignItems: ItemAlign.Center }) {
 				Image($r('app.media.dropdown'))

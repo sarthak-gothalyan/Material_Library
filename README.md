@@ -22,9 +22,9 @@ import { MaterialSelect, MenuOption, MultipleMaterialSelect, MultipleMenuOption,
 2. Initialize select model data
 
 ```
-private singleSelectModel: MaterialModel.Model = new MaterialModel.Model("Title", "Placeholder")
+private singleSelectModel: MaterialModel.SingleSelectModel = new MaterialModel.SingleSelectModel("Title", "Placeholder")
 
-private multipleSelectModel: MaterialModel.Model = new MaterialModel.Model("Title")
+private multipleSelectModel: MaterialModel.MultipleSelectModel = new MaterialModel.MultipleSelectModel("Title")
 
 private dotModel: MaterialModel.DotModel = new MaterialModel.DotModel()
 ```

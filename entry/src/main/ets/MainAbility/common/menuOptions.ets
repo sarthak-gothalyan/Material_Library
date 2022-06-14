@@ -45,9 +45,9 @@ class MenuOption {
 class MultipleMenuOption {
 	private value: string
 	private id: number | string
-	private isChecked: boolean = false
+	private checked: boolean = false
 
-	constructor(value: string, id: number | string, isChecked?: boolean) {
+	constructor(value: string, id: number | string, checked?: boolean) {
 		if (value == null || value == undefined) {
 			value = ''
 			console.error("null or undefined passed as value to MultipleMenuOption")
@@ -58,7 +58,7 @@ class MultipleMenuOption {
 		}
 		this.value = value
 		this.id = id
-		if (isChecked != null && isChecked != undefined) this.isChecked = Boolean(isChecked)
+		if (checked != null && checked != undefined) this.checked = Boolean(checked)
 	}
 
 	setValue(value: string): MultipleMenuOption {
@@ -87,17 +87,17 @@ class MultipleMenuOption {
 		return this.value
 	}
 
-	setIsChecked(isChecked: boolean): MultipleMenuOption {
-		if (isChecked == null && isChecked == undefined) {
-			isChecked = false
+	setChecked(checked: boolean): MultipleMenuOption {
+		if (checked == null && checked == undefined) {
+			checked = false
 			console.error("null passed as isChecked to MultipleMenuOption")
 		}
-		this.isChecked = Boolean(isChecked)
+		this.checked = Boolean(checked)
 		return this
 	}
 
-	getIsChecked(): boolean {
-		return this.isChecked
+	getChecked(): boolean {
+		return this.checked
 	}
 }
 

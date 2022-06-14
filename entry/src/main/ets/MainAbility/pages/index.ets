@@ -14,50 +14,63 @@ struct Index {
 	name: string = 'Industry'
 	placeholder: string = 'select'
 	selectMenu: MenuOption[] = []
-	@State selection: MenuOption = new MenuOption(null, null)
-	selectModel: MaterialModel.Model = new MaterialModel.Model('Industry')
+	selection: MenuOption = new MenuOption(null, null)
+	selectModel: MaterialModel.SingleSelectModel = new MaterialModel.SingleSelectModel('Industry')
 	selectMenuModel: MaterialModel.MenuModel = new MaterialModel.MenuModel()
+
 	multipleSelectName: string = 'Use Case'
 	multipleSelectMenu: MultipleMenuOption[] = []
-	@State multiple_selection: MultipleMenuOption[] = []
-	multipleSelectModel: MaterialModel.Model = new MaterialModel.Model('Use Case')
+	multiple_selection: MultipleMenuOption[] = []
+	multipleSelectModel: MaterialModel.MultipleSelectModel = new MaterialModel.MultipleSelectModel('Use Case')
 	multipleMenuModel: MaterialModel.MultipleMenuModel = new MaterialModel.MultipleMenuModel()
+
 	dotModel: MaterialModel.DotModel = new MaterialModel.DotModel()
 	dotMenuModel: MaterialModel.DotMenuModel = new MaterialModel.DotMenuModel()
 	dotMenu: DotMenuOption[] = [
+		new DotMenuOption('Download', 2, $r('app.media.download')),
+		new DotMenuOption('Download', 2, $r('app.media.download')),
+		new DotMenuOption('Download', 2, $r('app.media.download')),
 		new DotMenuOption(null, null),
 		new DotMenuOption(null, null, null),
-		new DotMenuOption('Get Link', 1),
-		new DotMenuOption('Download', 2, $r('app.media.download')),
-		new DotMenuOption('Download', 2, $r('app.media.download')),
-		new DotMenuOption('Download', 2, $r('app.media.download')), new DotMenuOption('Download', 2, $r('app.media.download')), new DotMenuOption('Download', 2, $r('app.media.download')), new DotMenuOption('Download', 2, $r('app.media.download')), new DotMenuOption('Download', 2, $r('app.media.download')), new DotMenuOption('Download', 2, $r('app.media.download')), new DotMenuOption('Download', 2, $r('app.media.download')), new DotMenuOption('Download', 2, $r('app.media.download')), new DotMenuOption('Download', 2, $r('app.media.download')), new DotMenuOption('Download', 2, $r('app.media.download')), new DotMenuOption('Download', 2, $r('app.media.download')), new DotMenuOption('Download', 2, $r('app.media.download')), new DotMenuOption('Download', 2, $r('app.media.download')), new DotMenuOption('Download', 2, $r('app.media.download')), new DotMenuOption('Download', 2, $r('app.media.download')), new DotMenuOption('Download', 2, $r('app.media.download')), new DotMenuOption('Download', 2, $r('app.media.download')), new DotMenuOption('Download', 2, $r('app.media.download')), new DotMenuOption('Download', 2, $r('app.media.download')), new DotMenuOption('Download', 2, $r('app.media.download')), new DotMenuOption('Download', 2, $r('app.media.download')), new DotMenuOption('Download', 2, $r('app.media.download')), new DotMenuOption('Download', 2, $r('app.media.download')), new DotMenuOption('Download', 2, $r('app.media.download')), new DotMenuOption('Download', 2, $r('app.media.download')), new DotMenuOption('Download', 2, $r('app.media.download')), new DotMenuOption('Download', 2, $r('app.media.download')), new DotMenuOption('Download', 2, $r('app.media.download')),
+		new DotMenuOption(null, 1),
+		new DotMenuOption('Download', null),
+		new DotMenuOption('Download', null, null),
+		new DotMenuOption(null, null, $r('app.media.download')),
+		new DotMenuOption(null, 2, null),
 	]
 
 	aboutToAppear() {
-		this.selectModel.setWidth("50%")
-		this.selectModel.setPadding(null)
+		this.selectModel.setTitle(null)
+		this.selectModel.setTitleFontSize(null)
+		this.selectModel.setTitleFontColor(null)
+		this.selectModel.setHeight(null)
+		this.selectModel.setWidth(null)
 		this.selectModel.setBackgroundColor(null)
-		this.selectModel.setBorderColor(null)
-		this.selectModel.setBorderRadius(null)
 		this.selectModel.setBorderWidth(null)
-		this.selectModel.setSelectedColor(null)
-		this.selectMenuModel.setBorderRadius(null)
-		this.selectMenuModel.setBackgroundColor(null)
-		this.selectMenuModel.setFontSize(null)
-		this.selectMenuModel.setPadding(null)
+		this.selectModel.setBorderRadius(null)
+		this.selectModel.setBorderColor(null)
+		this.selectModel.setUnselectedColor(null)
+		this.selectModel.setPadding(null)
+		this.selectModel.setFontSize(null)
 		this.selectModel.setMargin(null)
 
-		this.multipleSelectModel.setWidth("50%")
-		this.multipleSelectModel.setPadding(null)
+		this.selectModel.setPlaceholder(null)
+		this.selectModel.setFontSize(null)
+		this.selectModel.setFontColor(null)
+
+
+		this.multipleSelectModel.setTitle(null)
+		this.multipleSelectModel.setTitleFontSize(null)
+		this.multipleSelectModel.setTitleFontColor(null)
 		this.multipleSelectModel.setHeight(null)
-		this.multipleSelectModel.setPlaceholder(null)
+		this.multipleSelectModel.setWidth(null)
 		this.multipleSelectModel.setBackgroundColor(null)
-		this.multipleSelectModel.setBorderColor(null)
-		this.multipleSelectModel.setBorderRadius(null)
 		this.multipleSelectModel.setBorderWidth(null)
-		this.multipleMenuModel.setFontSize(null)
-		this.multipleMenuModel.setBackgroundColor(null)
-		this.multipleMenuModel.setCheckBoxHeight(null)
+		this.multipleSelectModel.setBorderRadius(null)
+		this.multipleSelectModel.setBorderColor(null)
+		this.multipleSelectModel.setUnselectedColor(null)
+		this.multipleSelectModel.setPadding(null)
+		this.multipleSelectModel.setFontSize(null)
 		this.multipleSelectModel.setMargin(null)
 
 		this.dotMenuModel.setBackgroundColor(null)
@@ -66,23 +79,29 @@ struct Index {
 		this.dotMenuModel.setPadding(0)
 		this.dotModel.setMargin(null)
 
+		// prop check
 		this.dotMenu[0].setValue(null)
 		this.dotMenu[1].setId(null)
 		this.dotMenu[2].setIcon(null)
 
-		for (let i = 0; i <= 100; i++) {
+		for (let i = 0; i <= 5; i++) {
 			this.selectMenu.push(new MenuOption('Option ' + i, i))
 		}
+		// prop check
 		this.selectMenu[0].setValue(null)
 		this.selectMenu[1].setId(null)
+		// constructor check
 		this.selectMenu.push(new MenuOption(null, null))
-		let options = [true, false, true, false, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true,]
+
+		let options = [true, false, true, false, true,]
 		options.forEach((c, i) => {
 			this.multipleSelectMenu.push(new MultipleMenuOption('Option ' + i, i, null))
 		})
+		// set prop check
 		this.multipleSelectMenu[0].setValue(null)
 		this.multipleSelectMenu[1].setId(null)
-		this.multipleSelectMenu[2].setIsChecked(null)
+		this.multipleSelectMenu[2].setChecked(null)
+		// null constructor check
 		this.multipleSelectMenu.push(new MultipleMenuOption(null, null))
 		this.multipleSelectMenu.push(new MultipleMenuOption(null, null, null))
 	}
