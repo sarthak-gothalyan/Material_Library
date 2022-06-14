@@ -5,7 +5,7 @@ import {
 	MultipleMenuOption,
 	MaterialDotMenu,
 	DotMenuOption,
-	MaterialModel
+	MaterialModel,
 } from '../common/select'
 
 @Entry
@@ -40,6 +40,7 @@ struct Index {
 	]
 
 	aboutToAppear() {
+		// single select null check
 		this.selectModel.setTitle(null)
 		this.selectModel.setTitleFontSize(null)
 		this.selectModel.setTitleFontColor(null)
@@ -58,7 +59,7 @@ struct Index {
 		this.selectModel.setFontSize(null)
 		this.selectModel.setFontColor(null)
 
-
+		// multiple select null check
 		this.multipleSelectModel.setTitle(null)
 		this.multipleSelectModel.setTitleFontSize(null)
 		this.multipleSelectModel.setTitleFontColor(null)
@@ -70,14 +71,47 @@ struct Index {
 		this.multipleSelectModel.setBorderColor(null)
 		this.multipleSelectModel.setUnselectedColor(null)
 		this.multipleSelectModel.setPadding(null)
-		this.multipleSelectModel.setFontSize(null)
 		this.multipleSelectModel.setMargin(null)
 
-		this.dotMenuModel.setBackgroundColor(null)
-		this.dotMenuModel.setFontSize(null)
-		this.dotMenuModel.setIconHeight(null)
-		this.dotMenuModel.setPadding(0)
+		// dot null check
+		this.dotModel.setHeight(null)
+		this.dotModel.setWidth(null)
+		this.dotModel.setBackgroundColor(null)
 		this.dotModel.setMargin(null)
+
+		// menu null check
+		this.selectMenuModel.setHeight(null)
+		this.selectMenuModel.setWidth(null)
+		this.selectMenuModel.setFontSize(null)
+		this.selectMenuModel.setFontColor(null)
+		this.selectMenuModel.setBackgroundColor(null)
+		this.selectMenuModel.setBorderRadius(null)
+		this.selectMenuModel.setPadding(null)
+
+		// multiple menu null check
+		this.multipleMenuModel.setHeight(null)
+		this.multipleMenuModel.setWidth(null)
+		this.multipleMenuModel.setFontSize(null)
+		this.multipleMenuModel.setFontColor(null)
+		this.multipleMenuModel.setBackgroundColor(null)
+		this.multipleMenuModel.setBorderRadius(null)
+		this.multipleMenuModel.setPadding(null)
+
+		this.multipleMenuModel.setCheckColor(null)
+		this.multipleMenuModel.setCheckBoxHeight(null)
+		this.multipleMenuModel.setCheckBoxWidth(null)
+
+		// dot menu null check
+		this.dotMenuModel.setHeight(null)
+		this.dotMenuModel.setWidth(null)
+		this.dotMenuModel.setFontSize(null)
+		this.dotMenuModel.setFontColor(null)
+		this.dotMenuModel.setBackgroundColor(null)
+		this.dotMenuModel.setBorderRadius(null)
+		this.dotMenuModel.setPadding(null)
+
+		this.dotMenuModel.setIconHeight(null)
+		this.dotMenuModel.setIconWidth(null)
 
 		// prop check
 		this.dotMenu[0].setValue(null)
@@ -92,10 +126,12 @@ struct Index {
 		this.selectMenu[1].setId(null)
 		// constructor check
 		this.selectMenu.push(new MenuOption(null, null))
+		this.selectMenu.push(new MenuOption("a", null))
+		this.selectMenu.push(new MenuOption(null, 50))
 
 		let options = [true, false, true, false, true,]
 		options.forEach((c, i) => {
-			this.multipleSelectMenu.push(new MultipleMenuOption('Option ' + i, i, null))
+			this.multipleSelectMenu.push(new MultipleMenuOption('Option ' + i, i, c))
 		})
 		// set prop check
 		this.multipleSelectMenu[0].setValue(null)
@@ -104,6 +140,11 @@ struct Index {
 		// null constructor check
 		this.multipleSelectMenu.push(new MultipleMenuOption(null, null))
 		this.multipleSelectMenu.push(new MultipleMenuOption(null, null, null))
+		this.multipleSelectMenu.push(new MultipleMenuOption("a", null))
+		this.multipleSelectMenu.push(new MultipleMenuOption(null, 10))
+		this.multipleSelectMenu.push(new MultipleMenuOption("a", null, null))
+		this.multipleSelectMenu.push(new MultipleMenuOption(null, 11, null))
+		this.multipleSelectMenu.push(new MultipleMenuOption(null, null, false))
 	}
 
 	build() {

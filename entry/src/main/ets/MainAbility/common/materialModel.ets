@@ -1,5 +1,5 @@
 namespace MaterialModel {
-	export class Model {
+	export class MultipleSelectModel {
 		private title: string = ""
 		private titleFontSize: number | string = 14
 		private titleFontColor: string | Resource = '#333F48'
@@ -20,7 +20,7 @@ namespace MaterialModel {
 			}
 		}
 
-		setTitle(title: string): Model {
+		setTitle(title: string): MultipleSelectModel {
 			if (title == null || title == undefined) {
 				this.title = ''
 				return this
@@ -33,7 +33,7 @@ namespace MaterialModel {
 			return this.title
 		}
 
-		setTitleFontSize(titleFontSize: number | string): Model {
+		setTitleFontSize(titleFontSize: number | string): MultipleSelectModel {
 			if (titleFontSize == null || titleFontSize == undefined) {
 				this.titleFontSize = 14
 				return this
@@ -46,7 +46,7 @@ namespace MaterialModel {
 			return this.titleFontSize
 		}
 
-		setTitleFontColor(titleFontColor: string | Resource): Model {
+		setTitleFontColor(titleFontColor: string | Resource): MultipleSelectModel {
 			if (titleFontColor == null || titleFontColor == undefined) {
 				this.titleFontColor = '#333F48'
 				return this
@@ -59,7 +59,7 @@ namespace MaterialModel {
 			return this.titleFontColor
 		}
 
-		setHeight(height: number | string): Model {
+		setHeight(height: number | string): MultipleSelectModel {
 			if (height == null || height == undefined) {
 				this.height = 60
 				return this
@@ -72,7 +72,7 @@ namespace MaterialModel {
 			return this.height
 		}
 
-		setWidth(width: number | string): Model {
+		setWidth(width: number | string): MultipleSelectModel {
 			if (width == null || width == undefined) {
 				this.width = 120
 				return this
@@ -85,7 +85,7 @@ namespace MaterialModel {
 			return this.width
 		}
 
-		setBackgroundColor(backgroundColor: string | Color): Model {
+		setBackgroundColor(backgroundColor: string | Color): MultipleSelectModel {
 			if (backgroundColor == null || backgroundColor == undefined) {
 				this.backgroundColor = Color.White
 				return this
@@ -98,7 +98,7 @@ namespace MaterialModel {
 			return this.backgroundColor
 		}
 
-		setBorderWidth(borderWidth: number | string): Model {
+		setBorderWidth(borderWidth: number | string): MultipleSelectModel {
 			if (borderWidth == null || borderWidth == undefined) {
 				this.borderWidth = 1
 				return this
@@ -111,7 +111,7 @@ namespace MaterialModel {
 			return this.borderWidth
 		}
 
-		setBorderRadius(borderRadius: number | string): Model {
+		setBorderRadius(borderRadius: number | string): MultipleSelectModel {
 			if (borderRadius == null || borderRadius == undefined) {
 				this.borderRadius = 4
 				return this
@@ -124,7 +124,7 @@ namespace MaterialModel {
 			return this.borderRadius
 		}
 
-		setBorderColor(borderColor: string | Color): Model {
+		setBorderColor(borderColor: string | Color): MultipleSelectModel {
 			if (borderColor == null || borderColor == undefined) {
 				this.borderColor = '#9CA2C7'
 				return this
@@ -137,7 +137,7 @@ namespace MaterialModel {
 			return this.borderColor
 		}
 
-		setUnselectedColor(unselectedColor: string | Color): Model {
+		setUnselectedColor(unselectedColor: string | Color): MultipleSelectModel {
 			if (unselectedColor == null || unselectedColor == undefined) {
 				this.unselectedColor = Color.White
 				return this
@@ -150,7 +150,7 @@ namespace MaterialModel {
 			return this.unselectedColor
 		}
 
-		setSelectedColor(selectedColor: string | Color): Model {
+		setSelectedColor(selectedColor: string | Color): MultipleSelectModel {
 			if (selectedColor == null || selectedColor == undefined) {
 				this.selectedColor = '#F0F3FF'
 				return this
@@ -163,9 +163,9 @@ namespace MaterialModel {
 			return this.selectedColor
 		}
 
-		setPadding(padding: Margin | Length): Model {
+		setPadding(padding: Margin | Length): MultipleSelectModel {
 			if (padding == null || padding == undefined) {
-				this.padding = 10
+				this.padding = 0
 				return this
 			}
 			this.padding = padding
@@ -176,7 +176,7 @@ namespace MaterialModel {
 			return this.padding
 		}
 
-		setMargin(margin: Margin | Length): Model {
+		setMargin(margin: Margin | Length): MultipleSelectModel {
 			if (margin == null || margin == undefined) {
 				this.margin = 0
 				return this
@@ -190,7 +190,7 @@ namespace MaterialModel {
 		}
 	}
 
-	export class SingleSelectModel extends Model {
+	export class SingleSelectModel extends MultipleSelectModel {
 		private placeholder: string = "Select"
 		private fontSize: number | string = 18
 		private fontColor: string | Color = '#333F48'
@@ -215,7 +215,7 @@ namespace MaterialModel {
 			return this.placeholder
 		}
 
-		setFontSize(fontSize: number | string): Model {
+		setFontSize(fontSize: number | string): SingleSelectModel {
 			if (fontSize == null || fontSize == undefined) {
 				this.fontSize = 18
 				return this
@@ -228,7 +228,7 @@ namespace MaterialModel {
 			return this.fontSize
 		}
 
-		setFontColor(fontColor: string | Color): Model {
+		setFontColor(fontColor: string | Color): SingleSelectModel {
 			if (fontColor == null || fontColor == undefined) {
 				this.fontColor = '#333F48'
 				return this
@@ -239,12 +239,6 @@ namespace MaterialModel {
 
 		getFontColor(): string | Color {
 			return this.fontColor
-		}
-	}
-
-	export class MultipleSelectModel extends Model {
-		constructor(title: string) {
-			super(title)
 		}
 	}
 
@@ -337,7 +331,7 @@ namespace MaterialModel {
 
 		setPadding(padding: Margin | Length): MenuModel {
 			if (padding == null || padding == undefined) {
-				this.padding = 10
+				this.padding = 0
 				return this
 			}
 			this.padding = padding
