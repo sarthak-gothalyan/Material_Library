@@ -4,7 +4,9 @@ Material Select design in OpenHarmony.
 
 ## Download & Install
 
+Install using npm
 
+```npm i material-checkbox```
 
 ## Usage Instructions
 

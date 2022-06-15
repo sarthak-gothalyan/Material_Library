@@ -10,8 +10,9 @@
   "repository": {},
   "license": "ISC",
   "dependencies": {
-    "hypium": "^1.0.0",
     "@ohos/hvigor": "1.0.6",
-    "@ohos/hvigor-ohos-plugin": "1.0.6"
+    "@ohos/hvigor-ohos-plugin": "1.0.6",
+    "@ohos/material-select": "file:material-select",
+    "hypium": "^1.0.0"
   }
 }

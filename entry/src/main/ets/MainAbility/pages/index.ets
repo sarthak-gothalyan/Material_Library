@@ -1,14 +1,11 @@
-//import {
-//	MaterialSelect,
-//	MenuOption,
-//	MultipleSelect,
-//	MultipleMenuOption,
-//	DotMenu,
-//	DotMenuOption
-//} from '@ohos/material-select'
-import { MaterialSelect, MenuOption } from '../common/singleSelect'
-import { MultipleSelect, MultipleMenuOption } from '../common/multipleSelect'
-import { DotMenu, DotMenuOption } from '../common/dotMenu'
+import {
+	MaterialSelect,
+	MenuOption,
+	MultipleSelect,
+	MultipleMenuOption,
+	DotMenu,
+	DotMenuOption
+} from '@ohos/material-select'
 
 @Entry
 @Component
