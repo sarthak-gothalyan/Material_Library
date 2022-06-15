@@ -1,6 +1,6 @@
-# Material_Select
+# Material Select
 
-Material select design in OpenHarmony.
+Material Select design in OpenHarmony.
 
 ## Download & Install
 
@@ -16,27 +16,31 @@ DotMenu - Provides dot menu functionality. <br/>
 1. Import files and code dependencies
 
 ```ets
-import { MaterialSelect, MenuOption, MultipleMaterialSelect, MultipleMenuOption, MaterialDotMenu, DotMenuOption, MaterialModel } from '../commom/select'
+import { MaterialSelect, MenuOption } from '../common/singleSelect'
+
+import { MultipleSelect, MultipleMenuOption } from '../common/multipleSelect'
+
+import { DotMenu, DotMenuOption } from '../common/dotMenu'
 ```
 
 2. Initialize select model data
 
 ```
-private singleSelectModel: MaterialModel.SingleSelectModel = new MaterialModel.SingleSelectModel("Title", "Placeholder")
+private singleSelectModel:MaterialSelect.Model = new MaterialSelect.Model('Title', 'Placeholder')
 
-private multipleSelectModel: MaterialModel.MultipleSelectModel = new MaterialModel.MultipleSelectModel("Title")
+private multipleSelectModel: MultipleSelect.Model = new MultipleSelect.Model('Title')
 
-private dotModel: MaterialModel.DotModel = new MaterialModel.DotModel()
+private dotModel: DotMenu.Model = new DotMenu.Model()
 ```
 
 3. Initialize select menu model data
 
 ```
-private singleSelectMenuModel: MaterialModel.MenuModel = new MaterialModel.MenuModel()
+private singleSelectMenuModel: MaterialSelect.MenuModel = new MaterialSelect.MenuModel()
 
-private multipleSelectMenuModel: MaterialModel.MultipleMenuModel = new MaterialModel.MultipleModel()
+private multipleSelectMenuModel: MultipleSelect.MenuModel = new MultipleSelect.MenuModel()
 
-private dotMenuModel: MaterialModel.DotMenuModel = new MaterialModel.DotMenuModel()
+private dotMenuModel: DotMenu.MenuModel = new DotMenu.MenuModel()
 ```
 
 4. Initialize menus for select components
@@ -75,7 +79,7 @@ MaterialSelect({
 6. Code for creating multiple selection component
 
 ```
-MultipleMaterialSelect({
+MultipleSelect({
     menu: this.multiple,
     onSelect: (it: MultipleMenuOption[]) => {},
     model: this.multipleSelectModel,
@@ -89,7 +93,7 @@ MultipleMaterialSelect({
 6. Code for creating dot menu component
 
 ```
-MaterialDotMenu({
+DotMenu({
       menu: this.dotMenu,
       onSelect: (it: DotMenuOption) => {},
       model: this.dotModel,
@@ -106,11 +110,19 @@ Supports OpenHarmony API version 8
 
 ## Code Contribution
 
-
-
 ## Open source License
 
+This project is based
+on [Apache License 2.0](https://github.com/Applib-OpenHarmony/Material_Ui_Checkbox/blob/main/LICENSE), please enjoy and
+participate in open source freely.
 
+## Open Issues
+
+1. BorderRadius property in MenuModel does not change the border radius of popup menu.
+<br/><br/>
+2. Popup menu of MultipleSelect disappears after single click.
+<br/><br/>
+3. Option text in MultipleSelect and DotMenu does not wrap into two lines.
 
 # Reference:
 

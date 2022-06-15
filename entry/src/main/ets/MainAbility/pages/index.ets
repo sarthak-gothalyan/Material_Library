@@ -1,12 +1,14 @@
-import {
-	MaterialSelect,
-	MenuOption,
-	MultipleSelect,
-	MultipleMenuOption,
-	MaterialDotMenu,
-	DotMenuOption,
-	MaterialModel,
-} from '../common/select'
+//import {
+//	MaterialSelect,
+//	MenuOption,
+//	MultipleSelect,
+//	MultipleMenuOption,
+//	DotMenu,
+//	DotMenuOption
+//} from '@ohos/material-select'
+import { MaterialSelect, MenuOption } from '../common/singleSelect'
+import { MultipleSelect, MultipleMenuOption } from '../common/multipleSelect'
+import { DotMenu, DotMenuOption } from '../common/dotMenu'
 
 @Entry
 @Component
@@ -15,16 +17,16 @@ struct Index {
 	placeholder: string = 'select'
 	selectMenu: MenuOption[] = []
 	selection: MenuOption = new MenuOption(null, null)
-	selectModel: MaterialModel.SingleSelectModel = new MaterialModel.SingleSelectModel('Industry')
-	selectMenuModel: MaterialModel.MenuModel = new MaterialModel.MenuModel()
+	selectModel: MaterialSelect.Model = new MaterialSelect.Model('Industry', 'sel')
+	selectMenuModel: MaterialSelect.MenuModel = new MaterialSelect.MenuModel()
 
 	multipleSelectName: string = 'Use Case'
 	multipleSelectMenu: MultipleMenuOption[] = []
-	multipleSelectModel: MaterialModel.MultipleSelectModel = new MaterialModel.MultipleSelectModel('Use Case')
-	multipleMenuModel: MaterialModel.MultipleMenuModel = new MaterialModel.MultipleMenuModel()
+	multipleSelectModel: MultipleSelect.Model = new MultipleSelect.Model('Use Case')
+	multipleMenuModel: MultipleSelect.MenuModel = new MultipleSelect.MenuModel()
 
-	dotModel: MaterialModel.DotModel = new MaterialModel.DotModel()
-	dotMenuModel: MaterialModel.DotMenuModel = new MaterialModel.DotMenuModel()
+	dotModel: DotMenu.Model = new DotMenu.Model()
+	dotMenuModel: DotMenu.MenuModel = new DotMenu.MenuModel()
 	dotMenu: DotMenuOption[] = [
 		new DotMenuOption('Download', 2, $r('app.media.download')),
 		new DotMenuOption('Download', 2, $r('app.media.download')),
@@ -83,8 +85,8 @@ struct Index {
 		this.selectMenuModel.setBorderRadius(null)
 		this.selectMenuModel.setPadding(null)
 
-		this.multipleMenuModel.setHeight(null)
-		this.multipleMenuModel.setWidth(null)
+		this.multipleMenuModel.setHeight(60)
+		this.multipleMenuModel.setWidth(10)
 		this.multipleMenuModel.setFontSize(null)
 		this.multipleMenuModel.setFontColor(null)
 		this.multipleMenuModel.setBackgroundColor(null)
@@ -96,7 +98,7 @@ struct Index {
 		this.multipleMenuModel.setCheckBoxWidth(null)
 
 		this.dotMenuModel.setHeight(null)
-		this.dotMenuModel.setWidth(null)
+		this.dotMenuModel.setWidth(600)
 		this.dotMenuModel.setFontSize(null)
 		this.dotMenuModel.setFontColor(null)
 		this.dotMenuModel.setBackgroundColor(null)
@@ -141,13 +143,6 @@ struct Index {
 
 	build() {
 		Column({ space: 10 }) {
-			Flex({ justifyContent: FlexAlign.SpaceBetween, alignItems: ItemAlign.Center }) {
-				Image($r('app.media.back')).height(24).width(24).objectFit(ImageFit.Contain)
-				Text('Select Menus').fontSize(21).fontWeight(FontWeight.Bold)
-				Image($r('app.media.categories')).height(24).width(24).objectFit(ImageFit.Contain)
-			}
-			.width('80%')
-
 			Row({ space: 10 }) {
 				MaterialSelect({
 					menu: [
@@ -158,8 +153,8 @@ struct Index {
 					onSelect: (it: MenuOption) => {
 						console.log(it.getValue())
 					},
-					model: new MaterialModel.SingleSelectModel("Single Select"),
-					menuModel: new MaterialModel.MenuModel(),
+					model: new MaterialSelect.Model("Single Select", 'sed'),
+					menuModel: this.selectMenuModel,
 				})
 				MultipleSelect({
 					menu: [
@@ -172,8 +167,8 @@ struct Index {
 							console.log(it.getValue())
 						})
 					},
-					model: new MaterialModel.MultipleSelectModel("Multiple Select"),
-					menuModel: new MaterialModel.MultipleMenuModel()
+					model: new MultipleSelect.Model("Multiple Select"),
+					menuModel: this.multipleMenuModel
 				})
 			}
 
@@ -182,7 +177,7 @@ struct Index {
 					Text('File')
 						.fontSize(18)
 						.fontWeight(FontWeight.Bold)
-					MaterialDotMenu({
+					DotMenu({
 						menu: [
 							new DotMenuOption("Preview", 1, $r('app.media.preview')),
 							new DotMenuOption("Download", 2, $r('app.media.download')),
@@ -191,8 +186,8 @@ struct Index {
 						onSelect: (it: DotMenuOption) => {
 							console.log(it.getId() + ' ' + it.getValue())
 						},
-						model: new MaterialModel.DotModel(),
-						menuModel: new MaterialModel.DotMenuModel()
+						model: new DotMenu.Model(),
+						menuModel: this.dotMenuModel
 					})
 				}
 
