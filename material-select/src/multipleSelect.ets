@@ -33,7 +33,6 @@ struct MultipleSelect {
 			}
 		}
 		this.selected = choices
-		console.log(this.menuModel.getCheckBoxHeight() + "")
 	}
 
 	@Builder
