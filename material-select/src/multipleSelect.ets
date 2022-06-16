@@ -83,9 +83,12 @@ struct MultipleSelect {
 	build() {
 		Column({ space: 10 }) {
 			Text(this.model.getTitle())
+				.width(this.model.getWidth())
 				.fontSize(this.model.getTitleFontSize())
 				.fontColor(this.model.getTitleFontColor())
 				.fontWeight(FontWeight.Medium)
+				.maxLines(2)
+				.textOverflow({ overflow: TextOverflow.Ellipsis })
 			Flex({ justifyContent: FlexAlign.End, alignItems: ItemAlign.Center }) {
 				Image($r('app.media.dropdown'))
 					.height(8)

@@ -54,6 +54,7 @@ struct MaterialSelect {
 	build() {
 		Column({ space: 10 }) {
 			Text(this.model.getTitle())
+				.width(this.model.getWidth())
 				.fontSize(this.model.getTitleFontSize())
 				.fontColor(this.model.getTitleFontColor())
 				.fontWeight(FontWeight.Medium)

@@ -150,7 +150,7 @@ struct Index {
 					onSelect: (it: MenuOption) => {
 						console.log(it.getValue())
 					},
-					model: new MaterialSelect.Model("Single Select", 'sed'),
+					model: new MaterialSelect.Model("Single Select adfdfafadfadfadfadfadfdfadfadfasdfasdfasdfasdfasdfadfasf", 'sed'),
 					menuModel: this.selectMenuModel,
 				})
 				MultipleSelect({
@@ -164,7 +164,7 @@ struct Index {
 							console.log(it.getValue())
 						})
 					},
-					model: new MultipleSelect.Model("Multiple Select"),
+					model: new MultipleSelect.Model("Multiple Select adfafafsdfasdfadffdadfadfadfdfdfadfadfadfaf"),
 					menuModel: this.multipleMenuModel
 				})
 			}
