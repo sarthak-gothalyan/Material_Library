@@ -123,8 +123,6 @@ participate in open source freely.
 1. BorderRadius property in MenuModel does not change the border radius of popup menu.
 <br/><br/>
 2. Popup menu of MultipleSelect disappears after single click.
-<br/><br/>
-3. Option text in MultipleSelect and DotMenu does not wrap into two lines.
 
 # Reference:
 
