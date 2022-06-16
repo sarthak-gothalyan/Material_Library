@@ -37,7 +37,7 @@ struct MultipleSelect {
 
 	@Builder
 	MenuItem(option: MultipleMenuOption, index: number) {
-		Row({ space: 9 }) {
+		Flex({ justifyContent: FlexAlign.Start, alignItems: ItemAlign.Center }) {
 			Checkbox({ name: option.getValue(), group: "check" })
 				.select(option.getChecked())
 				.selectedColor(this.menuModel.getCheckColor())
@@ -47,6 +47,7 @@ struct MultipleSelect {
 					this.menu[index].setChecked(Boolean(val))
 					this.updateMenu()
 				})
+				.margin({right: 9})
 			Text(option.getValue())
 				.fontSize(this.menuModel.getFontSize())
 				.fontWeight(FontWeight.Bold)

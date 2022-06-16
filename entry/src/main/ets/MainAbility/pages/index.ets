@@ -82,8 +82,8 @@ struct Index {
 		this.selectMenuModel.setBorderRadius(null)
 		this.selectMenuModel.setPadding(null)
 
-		this.multipleMenuModel.setHeight(60)
-		this.multipleMenuModel.setWidth(10)
+		this.multipleMenuModel.setHeight(null)
+		this.multipleMenuModel.setWidth(null)
 		this.multipleMenuModel.setFontSize(null)
 		this.multipleMenuModel.setFontColor(null)
 		this.multipleMenuModel.setBackgroundColor(null)
@@ -95,7 +95,7 @@ struct Index {
 		this.multipleMenuModel.setCheckBoxWidth(null)
 
 		this.dotMenuModel.setHeight(null)
-		this.dotMenuModel.setWidth(600)
+		this.dotMenuModel.setWidth(null)
 		this.dotMenuModel.setFontSize(null)
 		this.dotMenuModel.setFontColor(null)
 		this.dotMenuModel.setBackgroundColor(null)

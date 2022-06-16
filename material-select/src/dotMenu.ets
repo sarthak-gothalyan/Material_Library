@@ -10,11 +10,12 @@ struct DotMenu {
 
 	@Builder
 	MenuItem(option: DotMenuOption) {
-		Row({ space: 12 }) {
+		Flex({ justifyContent: FlexAlign.Start, alignItems: ItemAlign.Center }) {
 			Image(option.getIcon())
 				.objectFit(ImageFit.Contain)
 				.width(this.menuModel.getIconWidth())
 				.height(this.menuModel.getIconHeight())
+				.margin({right: 12})
 			Text(option.getValue())
 				.fontSize(this.menuModel.getFontSize())
 				.fontColor(this.menuModel.getFontColor())
