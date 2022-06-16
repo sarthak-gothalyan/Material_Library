@@ -18,11 +18,11 @@ DotMenu - Provides dot menu functionality. <br/>
 1. Import files and code dependencies
 
 ```ets
-import { MaterialSelect, MenuOption } from '../common/singleSelect'
+import { MaterialSelect, MenuOption } from '@ohos/material-select'
 
-import { MultipleSelect, MultipleMenuOption } from '../common/multipleSelect'
+import { MultipleSelect, MultipleMenuOption } from '@ohos/material-select'
 
-import { DotMenu, DotMenuOption } from '../common/dotMenu'
+import { DotMenu, DotMenuOption } from '@ohos/material-select'
 ```
 
 2. Initialize select model data
