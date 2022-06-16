@@ -10,7 +10,7 @@ struct DotMenu {
 
 	@Builder
 	MenuItem(option: DotMenuOption) {
-		Flex({ justifyContent: FlexAlign.Start, alignItems: ItemAlign.Center }) {
+		Row() {
 			Image(option.getIcon())
 				.objectFit(ImageFit.Contain)
 				.width(this.menuModel.getIconWidth())
@@ -19,6 +19,9 @@ struct DotMenu {
 			Text(option.getValue())
 				.fontSize(this.menuModel.getFontSize())
 				.fontColor(this.menuModel.getFontColor())
+				.flexGrow(1)
+				.maxLines(2)
+				.textOverflow({ overflow: TextOverflow.Ellipsis })
 				.fontWeight(FontWeight.Bold)
 		}
 		.height(this.menuModel.getHeight())

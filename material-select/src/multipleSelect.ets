@@ -33,11 +33,12 @@ struct MultipleSelect {
 			}
 		}
 		this.selected = choices
+		console.log(this.menuModel.getCheckBoxHeight() + "")
 	}
 
 	@Builder
 	MenuItem(option: MultipleMenuOption, index: number) {
-		Flex({ justifyContent: FlexAlign.Start, alignItems: ItemAlign.Center }) {
+		Row() {
 			Checkbox({ name: option.getValue(), group: "check" })
 				.select(option.getChecked())
 				.selectedColor(this.menuModel.getCheckColor())
@@ -51,6 +52,7 @@ struct MultipleSelect {
 			Text(option.getValue())
 				.fontSize(this.menuModel.getFontSize())
 				.fontWeight(FontWeight.Bold)
+				.flexGrow(1)
 				.maxLines(2)
 				.textOverflow({ overflow: TextOverflow.Ellipsis })
 		}
